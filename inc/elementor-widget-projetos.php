@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// 1. Função de renderização HTML da lista de projetos
+// 1. Renderização HTML da grade de projetos
 function andorinha_render_projetos_grid( $posts_per_page = 6, $columns = 3 ) {
     $query = new WP_Query( array(
         'post_type'      => 'projetos',
@@ -96,10 +96,21 @@ function andorinha_projetos_shortcode( $atts ) {
 add_shortcode( 'andorinha_projetos', 'andorinha_projetos_shortcode' );
 
 
-// 3. Registrar Widget do Elementor apenas quando a classe base existir
-add_action( 'elementor/widgets/register', 'andorinha_register_elementor_projetos_widget' );
+// 3. Adicionar Categoria 'Andorinha' no Elementor
+add_action( 'elementor/elements/categories_registered', function( $elements_manager ) {
+    $elements_manager->add_category(
+        'andorinha-category',
+        array(
+            'title' => __( 'Andorinha', 'andorinha-starter' ),
+            'icon'  => 'fa fa-plug',
+        )
+    );
+} );
 
-function andorinha_register_elementor_projetos_widget( $widgets_manager ) {
+
+// 4. Classe do Widget Elementor registrada no hook init de widgets
+add_action( 'elementor/init', function() {
+
     if ( ! class_exists( '\Elementor\Widget_Base' ) ) {
         return;
     }
@@ -120,7 +131,11 @@ function andorinha_register_elementor_projetos_widget( $widgets_manager ) {
             }
 
             public function get_categories() {
-                return array( 'general' );
+                return array( 'andorinha-category', 'general', 'basic' );
+            }
+
+            public function get_keywords() {
+                return array( 'projetos', 'andorinha', 'lista', 'grid', 'posts' );
             }
 
             protected function register_controls() {
@@ -171,9 +186,14 @@ function andorinha_register_elementor_projetos_widget( $widgets_manager ) {
         }
     }
 
-    if ( method_exists( $widgets_manager, 'register' ) ) {
-        $widgets_manager->register( new Andorinha_Projetos_Elementor_Widget() );
-    } elseif ( method_exists( $widgets_manager, 'register_widget_type' ) ) {
-        $widgets_manager->register_widget_type( new Andorinha_Projetos_Elementor_Widget() );
-    }
-}
+    $register_callback = function( $widgets_manager ) {
+        if ( method_exists( $widgets_manager, 'register' ) ) {
+            $widgets_manager->register( new Andorinha_Projetos_Elementor_Widget() );
+        } elseif ( method_exists( $widgets_manager, 'register_widget_type' ) ) {
+            $widgets_manager->register_widget_type( new Andorinha_Projetos_Elementor_Widget() );
+        }
+    };
+
+    add_action( 'elementor/widgets/register', $register_callback );
+    add_action( 'elementor/widgets/widgets_registered', $register_callback );
+} );
