@@ -159,3 +159,9 @@ add_filter( 'nav_menu_css_class', 'andorinha_menu_item_class', 10, 3 );
    ============================================= */
 require_once get_template_directory() . '/inc/cpt-projetos.php';
 
+/* =============================================
+   ELEMENTOR WIDGET: LISTA DE PROJETOS
+   ============================================= */
+require_once get_template_directory() . '/inc/elementor-widget-projetos.php';
+
+
