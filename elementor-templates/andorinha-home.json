@@ -1,0 +1,1454 @@
+{
+  "version": "0.4",
+  "title": "Andorinha Home",
+  "type": "page",
+  "page_settings": [],
+  "content": [
+    {
+      "id": "e4397c3",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "full_width",
+        "gap": "default",
+        "background_background": "classic",
+        "background_color": "#020873",
+        "padding": {
+          "unit": "px",
+          "top": "120",
+          "right": "0",
+          "bottom": "80",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "header19 mbr-parallax-background",
+        "custom_height": {
+          "unit": "px",
+          "size": 600,
+          "sizes": []
+        },
+        "custom_height_inner": "min-height",
+        "content_position": "middle"
+      },
+      "elements": [
+        {
+          "id": "7733e54",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100,
+            "vertical_align": "middle"
+          },
+          "elements": [
+            {
+              "id": "56001e3",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 60,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "1d75c2d",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Potencializando Impactos Positivos em Projetos e Negócios",
+                "header_size": "h1",
+                "align": "center",
+                "title_color": "#ffffff",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 4.6,
+                  "sizes": []
+                },
+                "typography_font_weight": "800",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title mbr-white mbr-fonts-style display-1"
+              },
+              "elements": []
+            },
+            {
+              "id": "17b4593",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 20,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "7600c1d",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<em>A Andorinha Negócios Criativos transforma ideias em resultados, ampliando o alcance e o impacto de iniciativas socioeducacionais, culturais e sustentáveis.</em>",
+                "align": "center",
+                "text_color": "#ffffff",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.5,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-text mbr-white mbr-fonts-style display-7"
+              },
+              "elements": []
+            },
+            {
+              "id": "396a036",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 20,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "0bae54b",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "button",
+              "settings": {
+                "text": "Leia Mais",
+                "link": {
+                  "url": "#about",
+                  "is_external": false,
+                  "nofollow": false
+                },
+                "align": "center",
+                "button_type": "",
+                "background_color": "#149dcc",
+                "button_text_color": "#ffffff",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1,
+                  "sizes": []
+                },
+                "typography_font_weight": "600",
+                "border_border": "solid",
+                "border_width": {
+                  "unit": "px",
+                  "top": "2",
+                  "right": "2",
+                  "bottom": "2",
+                  "left": "2",
+                  "isLinked": true
+                },
+                "border_color": "#149dcc",
+                "border_radius": {
+                  "unit": "px",
+                  "top": "4",
+                  "right": "4",
+                  "bottom": "4",
+                  "left": "4",
+                  "isLinked": true
+                },
+                "button_padding": {
+                  "unit": "px",
+                  "top": "14",
+                  "right": "40",
+                  "bottom": "14",
+                  "left": "40",
+                  "isLinked": false
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "3bfeaf3",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 60,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b732476",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "80",
+          "right": "0",
+          "bottom": "80",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "image2"
+      },
+      "elements": [
+        {
+          "id": "fab7d8f",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 50,
+            "vertical_align": "middle",
+            "padding": {
+              "unit": "px",
+              "top": "20",
+              "right": "30",
+              "bottom": "20",
+              "left": "30",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "e9d5b01",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "image",
+              "settings": {
+                "image": {
+                  "url": "",
+                  "id": "",
+                  "alt": "Andorinha Negócios Criativos",
+                  "source": "library"
+                },
+                "image_size": "full",
+                "align": "center",
+                "width": {
+                  "unit": "%",
+                  "size": 100,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "019f72d",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 50,
+            "vertical_align": "middle",
+            "padding": {
+              "unit": "px",
+              "top": "20",
+              "right": "30",
+              "bottom": "20",
+              "left": "30",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "23fa38a",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p>A Andorinha Negócios Criativos atua no Planejamento das ações e dos resultados na Execução de Projetos Socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo.</p><p>Somos uma Empresa de Consultoria com foco em Gestão e Gerenciamento de Projeto contemplados em Editais, Leis de Incentivo e Transferências Diretas.</p><p>Nosso compromisso é com o impacto do resultado das ações pactuadas e para isso, atuamos na gestão dos processos, no monitoramento das ações, com aplicação de diversas ferramentas de avaliação e indicadores de resultados.</p>",
+                "align": "left",
+                "text_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.5,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "44f30ee",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "0",
+          "bottom": "20",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "content4"
+      },
+      "elements": [
+        {
+          "id": "fd4837d",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "f8521d8",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Quem Somos Nós",
+                "header_size": "h3",
+                "align": "center",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 3,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title mbr-fonts-style display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "daf1a45",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "divider",
+              "settings": {
+                "style": "solid",
+                "weight": {
+                  "unit": "px",
+                  "size": 2,
+                  "sizes": []
+                },
+                "color": "#149dcc",
+                "width": {
+                  "unit": "%",
+                  "size": 20,
+                  "sizes": []
+                },
+                "align": "center"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "746e806",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "40",
+          "right": "0",
+          "bottom": "40",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "content10"
+      },
+      "elements": [
+        {
+          "id": "d947621",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 40,
+            "vertical_align": "top",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "20",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "93e97b2",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Missão",
+                "header_size": "h5",
+                "align": "left",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 3,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title mbr-fonts-style display-2"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "c1db0ef",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 60,
+            "vertical_align": "top"
+          },
+          "elements": [
+            {
+              "id": "e6a8101",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p>Nossa missão é potencializar o impacto positivo de projetos socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo, fornecendo soluções inovadoras e estratégicas de consultoria que promovam o desenvolvimento integral e sustentável dos territórios. Nos dedicamos a transformar ideias em ações concretas, criando parcerias colaborativas e sustentáveis que geram valor para a sociedade e o meio ambiente.</p>",
+                "align": "left",
+                "text_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.5,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ed5df49",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "40",
+          "right": "0",
+          "bottom": "40",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "content10"
+      },
+      "elements": [
+        {
+          "id": "9c30e8f",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 40,
+            "vertical_align": "top",
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "20",
+              "bottom": "0",
+              "left": "0",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "cea7674",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Visão",
+                "header_size": "h5",
+                "align": "left",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 3,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title mbr-fonts-style display-2"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "4ca5523",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 60,
+            "vertical_align": "top"
+          },
+          "elements": [
+            {
+              "id": "557cb02",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p>Ser a referência nacional em consultoria para gestão e desenvolvimento de projetos socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo, reconhecida pela excelência, inovação e compromisso com resultados duradouros. Aspiramos a ser um agente transformador, contribuindo para um futuro mais justo, inclusivo e sustentável para todos.</p>",
+                "align": "left",
+                "text_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.5,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "84b0d4b",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "0",
+          "bottom": "20",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "content4"
+      },
+      "elements": [
+        {
+          "id": "15afdfa",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "1f33b9e",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Valores",
+                "header_size": "h3",
+                "align": "center",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 3,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title mbr-fonts-style display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "51d4ac2",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "divider",
+              "settings": {
+                "style": "solid",
+                "weight": {
+                  "unit": "px",
+                  "size": 2,
+                  "sizes": []
+                },
+                "color": "#149dcc",
+                "width": {
+                  "unit": "%",
+                  "size": 20,
+                  "sizes": []
+                },
+                "align": "center"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9808981",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "20",
+          "right": "0",
+          "bottom": "60",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "content8"
+      },
+      "elements": [
+        {
+          "id": "e9932c9",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100,
+            "padding": {
+              "unit": "px",
+              "top": "0",
+              "right": "60",
+              "bottom": "0",
+              "left": "60",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "76af038",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<ul><li><strong>Inovação:</strong> Valorizamos a criatividade e a busca constante por soluções inovadoras que atendam às necessidades emergentes da sociedade e do meio ambiente.</li><li><strong>Sustentabilidade:</strong> Comprometemo-nos com práticas que promovem a sustentabilidade ambiental, social e econômica em todos os nossos projetos e operações.</li><li><strong>Excelência:</strong> Buscamos a excelência em tudo o que fazemos, garantindo a qualidade e a eficácia dos serviços que oferecemos.</li><li><strong>Colaboração:</strong> Acreditamos no poder das parcerias e do trabalho em equipe, promovendo uma cultura de colaboração e cooperação com nossos clientes, parceiros e comunidades.</li><li><strong>Impacto Social:</strong> Focamos em gerar impactos sociais positivos, melhorando a qualidade de vida das pessoas e fortalecendo as comunidades onde atuamos.</li><li><strong>Ética e Transparência:</strong> Atuamos com integridade, ética e transparência, construindo relações de confiança e respeito com todos os stakeholders.</li><li><strong>Inclusão:</strong> Defendemos a diversidade e a inclusão, garantindo oportunidades iguais e promovendo a participação de todos em nossos projetos e processos.</li></ul>",
+                "align": "left",
+                "text_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.5,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b9e869d",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "0",
+          "bottom": "20",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "content4"
+      },
+      "elements": [
+        {
+          "id": "a0f5d4a",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "50c8718",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Soluções Criativas para Projetos",
+                "header_size": "h3",
+                "align": "center",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 3,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title mbr-fonts-style display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "9bfc30e",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "divider",
+              "settings": {
+                "style": "solid",
+                "weight": {
+                  "unit": "px",
+                  "size": 2,
+                  "sizes": []
+                },
+                "color": "#149dcc",
+                "width": {
+                  "unit": "%",
+                  "size": 20,
+                  "sizes": []
+                },
+                "align": "center"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "f7df557",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "40",
+          "right": "0",
+          "bottom": "60",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "features5"
+      },
+      "elements": [
+        {
+          "id": "d0b37f1",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 33,
+            "vertical_align": "top",
+            "padding": {
+              "unit": "px",
+              "top": "30",
+              "right": "20",
+              "bottom": "30",
+              "left": "20",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "7d44fd1",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Para Negócios",
+                "header_size": "h5",
+                "align": "center",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.8,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "card-title mbr-fonts-style display-5"
+              },
+              "elements": []
+            },
+            {
+              "id": "9cd992f",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 10,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "b6c8eb9",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "icon-list",
+              "settings": {
+                "icon_list": [
+                  {
+                    "text": "Mentorias Direcionadas",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "e9d6683"
+                  },
+                  {
+                    "text": "Criação e Gestão de Conteúdos",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "fe8a427"
+                  },
+                  {
+                    "text": "Gestão Ágil de Projetos",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "e2cf6f8"
+                  },
+                  {
+                    "text": "Capacitações e Treinamentos",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "cfed518"
+                  }
+                ],
+                "icon_color": "#149dcc",
+                "icon_size": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "text_color": "#232323",
+                "text_indent": {
+                  "unit": "px",
+                  "size": 10,
+                  "sizes": []
+                },
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.8,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "c23c5af",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 34,
+            "vertical_align": "top",
+            "padding": {
+              "unit": "px",
+              "top": "30",
+              "right": "20",
+              "bottom": "30",
+              "left": "20",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "dc4b8d1",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Para Projetos",
+                "header_size": "h5",
+                "align": "center",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.8,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "card-title mbr-fonts-style display-5"
+              },
+              "elements": []
+            },
+            {
+              "id": "9c95677",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 10,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "64b3465",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "icon-list",
+              "settings": {
+                "icon_list": [
+                  {
+                    "text": "Consultorias Estratégicas",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "b0219f7"
+                  },
+                  {
+                    "text": "Gestão de Recursos",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "299562d"
+                  },
+                  {
+                    "text": "Gestão de Processos",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "0d69e16"
+                  },
+                  {
+                    "text": "Elaboração de Projetos e Conteúdos",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "4a2f7e0"
+                  },
+                  {
+                    "text": "Planejamento e Monitoramento de Resultados",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "361f06c"
+                  },
+                  {
+                    "text": "Prestação de Contas e Relatórios de Execução",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "2ce107e"
+                  },
+                  {
+                    "text": "Mapeamento Socioterritorial",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "6dea813"
+                  },
+                  {
+                    "text": "Assessoria técnica de execução da plataforma transferegov",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "642d1c1"
+                  }
+                ],
+                "icon_color": "#149dcc",
+                "icon_size": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "text_color": "#232323",
+                "text_indent": {
+                  "unit": "px",
+                  "size": 10,
+                  "sizes": []
+                },
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.8,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "c6ff536",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 33,
+            "vertical_align": "top",
+            "padding": {
+              "unit": "px",
+              "top": "30",
+              "right": "20",
+              "bottom": "30",
+              "left": "20",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "f02fb37",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Mecanismos de Financiamento",
+                "header_size": "h5",
+                "align": "center",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.8,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "card-title mbr-fonts-style display-5"
+              },
+              "elements": []
+            },
+            {
+              "id": "2793343",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 10,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "654e77c",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "icon-list",
+              "settings": {
+                "icon_list": [
+                  {
+                    "text": "Leis de Incentivo ao Editais de Fomento",
+                    "selected_icon": {
+                      "value": "fas fa-check",
+                      "library": "fa-solid"
+                    },
+                    "_id": "2d62cfe"
+                  }
+                ],
+                "icon_color": "#149dcc",
+                "icon_size": {
+                  "unit": "px",
+                  "size": 14,
+                  "sizes": []
+                },
+                "text_color": "#232323",
+                "text_indent": {
+                  "unit": "px",
+                  "size": 10,
+                  "sizes": []
+                },
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.8,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9c7c50b",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "boxed",
+        "gap": "default",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "0",
+          "bottom": "60",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "form3"
+      },
+      "elements": [
+        {
+          "id": "7e05641",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 60,
+            "vertical_align": "top",
+            "padding": {
+              "unit": "px",
+              "top": "40",
+              "right": "30",
+              "bottom": "40",
+              "left": "0",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "66aafa7",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Nossa Localização",
+                "header_size": "h2",
+                "align": "left",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 3,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "f22e36c",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 20,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "3c10dd6",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "google_maps",
+              "settings": {
+                "address": "Av. Embaixador Abelardo Bueno, 3.500 - Sl 318 - Barra da Tijuca, Rio de Janeiro - RJ, 22775-040",
+                "zoom": {
+                  "unit": "px",
+                  "size": 15,
+                  "sizes": []
+                },
+                "height": {
+                  "unit": "px",
+                  "size": 450,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "c88acd7",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 40,
+            "vertical_align": "top",
+            "padding": {
+              "unit": "px",
+              "top": "40",
+              "right": "0",
+              "bottom": "40",
+              "left": "30",
+              "isLinked": false
+            }
+          },
+          "elements": [
+            {
+              "id": "d37c332",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Fale com um Consultor",
+                "header_size": "h2",
+                "align": "left",
+                "title_color": "#232323",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 3,
+                  "sizes": []
+                },
+                "typography_font_weight": "700",
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-section-title display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "3e4b69e",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "spacer",
+              "settings": {
+                "space": {
+                  "unit": "px",
+                  "size": 20,
+                  "sizes": []
+                }
+              },
+              "elements": []
+            },
+            {
+              "id": "2be623f",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "html",
+              "settings": {
+                "html": "<form id=\"contact-form\" style=\"font-family: Epilogue, sans-serif;\"><div style=\"margin-bottom: 15px;\"><input type=\"text\" name=\"nome\" placeholder=\"Nome\" required style=\"width:100%; padding:12px 16px; border:1px solid #ccc; border-radius:4px; font-family:Epilogue,sans-serif; font-size:1rem;\"></div><div style=\"margin-bottom: 15px;\"><input type=\"email\" name=\"email\" placeholder=\"Email\" required style=\"width:100%; padding:12px 16px; border:1px solid #ccc; border-radius:4px; font-family:Epilogue,sans-serif; font-size:1rem;\"></div><div style=\"margin-bottom: 15px;\"><input type=\"tel\" name=\"telefone\" placeholder=\"Telefone\" required style=\"width:100%; padding:12px 16px; border:1px solid #ccc; border-radius:4px; font-family:Epilogue,sans-serif; font-size:1rem;\"></div><div style=\"margin-bottom: 15px;\"><textarea name=\"mensagem\" placeholder=\"Fale sobre você\" required rows=\"4\" style=\"width:100%; padding:12px 16px; border:1px solid #ccc; border-radius:4px; font-family:Epilogue,sans-serif; font-size:1rem; resize:vertical;\"></textarea></div><div><button type=\"submit\" style=\"background:#232323; color:#fff; padding:14px 40px; border:2px solid #232323; border-radius:4px; font-family:Epilogue,sans-serif; font-size:1rem; font-weight:600; cursor:pointer; transition:all 0.3s;\">Enviar</button></div></form>"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3db3563",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "layout": "full_width",
+        "gap": "default",
+        "background_background": "classic",
+        "background_color": "#020873",
+        "padding": {
+          "unit": "px",
+          "top": "30",
+          "right": "0",
+          "bottom": "30",
+          "left": "0",
+          "isLinked": false
+        },
+        "_css_classes": "footer3"
+      },
+      "elements": [
+        {
+          "id": "6a9fa11",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "75a9422",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"text-align:center;\">© Copyright 2024 <a href=\"/\" style=\"color:#ffffff;\">Andorinha Negócios Criativos</a>. Todos Direitos Reservados.</p>",
+                "align": "center",
+                "text_color": "#ffffff",
+                "typography_typography": "custom",
+                "typography_font_family": "Epilogue",
+                "typography_font_size": {
+                  "unit": "rem",
+                  "size": 1.1,
+                  "sizes": []
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1.5,
+                  "sizes": []
+                },
+                "_css_classes": "mbr-text mbr-fonts-style mbr-white display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

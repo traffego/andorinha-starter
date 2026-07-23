@@ -1,0 +1,45 @@
+/*
+Theme Name: Andorinha Starter
+Theme URI: https://andorinhanegocioscriativos.com.br/
+Author: Andorinha Negócios Criativos
+Author URI: https://andorinhanegocioscriativos.com.br/
+Description: Tema WordPress customizado para Andorinha Negócios Criativos com suporte ao Elementor. Inclui fontes Epilogue, Bootstrap 5, estilos Mobirise, Animate CSS e navbar personalizada.
+Version: 1.0.0
+Requires at least: 5.6
+Requires PHP: 7.4
+Text Domain: andorinha-starter
+*/
+
+/* =============================================
+   ESTILOS BASE DO TEMA ANDORINHA
+   ============================================= */
+
+body {
+    font-family: 'Epilogue', sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Garantir que o Elementor herde a tipografia do tema */
+.elementor-widget-heading .elementor-heading-title {
+    font-family: 'Epilogue', sans-serif;
+}
+
+.elementor-widget-text-editor {
+    font-family: 'Epilogue', sans-serif;
+}
+
+/* Botão primário do tema */
+.elementor-widget-button .elementor-button {
+    font-family: 'Epilogue', sans-serif;
+    border-width: 2px;
+}
+
+/* Cores padrão do tema para o Elementor */
+:root {
+    --andorinha-primary: #020873;
+    --andorinha-secondary: #149dcc;
+    --andorinha-white: #ffffff;
+    --andorinha-dark: #232323;
+}

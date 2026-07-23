@@ -1,0 +1,629 @@
+{
+  "version": "0.4",
+  "title": "Andorinha Elementor Native Template Styled",
+  "type": "page",
+  "page_settings": [],
+  "content": [
+    {
+      "id": "44ba50d",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "header19-3",
+        "_css_classes": "header19 cid-sFGzrhlvIh mbr-parallax-background",
+        "background_background": "classic",
+        "background_color": "#020873",
+        "padding": {
+          "unit": "px",
+          "top": "150",
+          "right": "20",
+          "bottom": "120",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "5528555",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100,
+            "_css_classes": "col-md-12 col-lg-10 m-auto align-center"
+          },
+          "elements": [
+            {
+              "id": "6556350",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Potencializando Impactos Positivos em Projetos e Negócios",
+                "header_size": "h1",
+                "align": "center",
+                "title_color": "#ffffff",
+                "_css_classes": "mbr-section-title mbr-white mbr-fonts-style mb-3 display-1"
+              },
+              "elements": []
+            },
+            {
+              "id": "f63ee66",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p style=\"text-align: center;\"><em>A Andorinha Negócios Criativos transforma ideias em resultados, ampliando o alcance e o impacto de iniciativas socioeducacionais, culturais e sustentáveis.</em></p>",
+                "_css_classes": "mbr-text mbr-white mbr-fonts-style display-7"
+              },
+              "elements": []
+            },
+            {
+              "id": "5fa61f5",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "button",
+              "settings": {
+                "text": "Leia Mais",
+                "link": {
+                  "url": "#image2-2",
+                  "is_external": "",
+                  "nofollow": ""
+                },
+                "align": "center",
+                "_css_classes": "btn btn-secondary display-4"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "3961f04",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "image2-2",
+        "_css_classes": "image2 cid-upKTDVb5F8",
+        "padding": {
+          "unit": "px",
+          "top": "80",
+          "right": "20",
+          "bottom": "80",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "5976831",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 50,
+            "_css_classes": "col-12 col-lg-6"
+          },
+          "elements": [
+            {
+              "id": "76c2c33",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "image",
+              "settings": {
+                "image": {
+                  "url": "assets/images/two-women-work-1256x838.jpg",
+                  "id": ""
+                },
+                "caption_source": "none",
+                "_css_classes": "image-wrapper"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "9ff1d95",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 50,
+            "_css_classes": "col-12 col-lg"
+          },
+          "elements": [
+            {
+              "id": "1fdf000",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p>A Andorinha Negócios Criativos atua no Planejamento das ações e dos resultados na Execução de Projetos Socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo.<br>Somos uma Empresa de Consultoria com foco em Gestão e Gerenciamento de Projeto contemplados em Editais, Leis de Incentivo e Transferências Diretas.<br>Nosso compromisso é com o impacto do resultado das ações pactuadas e para isso, atuamos na gestão dos processos, no monitoramento das ações, com aplicação de diversas ferramentas de avaliação e indicadores de resultados.</p>",
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "9027772",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "content4-5",
+        "_css_classes": "content4 cid-upKVXTMknx",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "20",
+          "bottom": "20",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "45d0ae7",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "38efb0d",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Quem Somos Nós",
+                "header_size": "h2",
+                "align": "center",
+                "_css_classes": "mbr-section-title mbr-fonts-style align-center mb-4 display-2"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "070775c",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "content10-6",
+        "_css_classes": "content10 cid-upKW8yw6sP",
+        "padding": {
+          "unit": "px",
+          "top": "40",
+          "right": "20",
+          "bottom": "40",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a54c614",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 40,
+            "_css_classes": "col-12 col-md"
+          },
+          "elements": [
+            {
+              "id": "203e0aa",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Missão",
+                "header_size": "h3",
+                "_css_classes": "mbr-section-title mbr-fonts-style mb-4 display-2"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "1067ba0",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 60,
+            "_css_classes": "col-md-12 col-lg-6"
+          },
+          "elements": [
+            {
+              "id": "f15a383",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p>Nossa missão é potencializar o impacto positivo de projetos socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo, fornecendo soluções inovadoras e estratégicas de consultoria que promovam o desenvolvimento integral e sustentável dos territórios. Nos dedicamos a transformar ideias em ações concretas, criando parcerias colaborativas e sustentáveis que geram valor para a sociedade e o meio ambiente.</p>",
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "36412f9",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "content10-7",
+        "_css_classes": "content10 cid-upKWp2uQT9",
+        "padding": {
+          "unit": "px",
+          "top": "40",
+          "right": "20",
+          "bottom": "40",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a1850da",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 40,
+            "_css_classes": "col-12 col-md"
+          },
+          "elements": [
+            {
+              "id": "33dc9ca",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Visão",
+                "header_size": "h3",
+                "_css_classes": "mbr-section-title mbr-fonts-style mb-4 display-2"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "474a563",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 60,
+            "_css_classes": "col-md-12 col-lg-6"
+          },
+          "elements": [
+            {
+              "id": "84d6e55",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<p>Ser a referência nacional em consultoria para gestão e desenvolvimento de projetos socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo, reconhecida pela excelência, inovação e compromisso com resultados duradouros. Aspiramos a ser um agente transformador, contribuindo para um futuro mais justo, inclusivo e sustentável para todos.</p>",
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "174f2ab",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "content8-8",
+        "_css_classes": "content8 cid-upKWEWI8r7",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "20",
+          "bottom": "60",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "f0dc247",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100,
+            "_css_classes": "counter-container col-md-12 col-lg-10"
+          },
+          "elements": [
+            {
+              "id": "6bdfd59",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Valores",
+                "header_size": "h2",
+                "align": "center",
+                "_css_classes": "mbr-section-title mbr-fonts-style align-center mb-4 display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "e89bb75",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<ul><li><strong>Inovação:</strong> Valorizamos a criatividade e a busca constante por soluções inovadoras que atendam às necessidades emergentes da sociedade e do meio ambiente.</li><li><strong>Sustentabilidade:</strong> Comprometemo-nos com práticas que promovem a sustentabilidade ambiental, social e econômica em todos os nossos projetos e operações.</li><li><strong>Excelência:</strong> Buscamos a excelência em tudo o que fazemos, garantindo a qualidade e a eficácia dos serviços que oferecemos.</li><li><strong>Colaboração:</strong> Acreditamos no poder das parcerias e do trabalho em equipe, promovendo uma cultura de colaboração e cooperação com nossos clientes, parceiros e comunidades.</li><li><strong>Impacto Social:</strong> Focamos em gerar impactos sociais positivos, melhorando a qualidade de vida das pessoas e fortalecendo as comunidades onde atuamos.</li><li><strong>Ética e Transparência:</strong> Atuamos com integridade, ética e transparência, construindo relações de confiança e respeito com todos os stakeholders.</li><li><strong>Inclusão:</strong> Defendemos a diversidade e a inclusão, garantindo oportunidades iguais e promovendo a participação de todos em nossos projetos e processos.</li></ul>",
+                "_css_classes": "mbr-text mbr-fonts-style display-7"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2b3b8c2",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "content4-d",
+        "_css_classes": "content4 cid-upL1hJzG36",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "20",
+          "bottom": "20",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "a5e7588",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "c50d2fb",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Soluções Criativas para Projetos",
+                "header_size": "h2",
+                "align": "center",
+                "_css_classes": "mbr-section-title mbr-fonts-style align-center mb-4 display-2"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4e937a2",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "features5-c",
+        "_css_classes": "features5 cid-upL0XG62BF",
+        "padding": {
+          "unit": "px",
+          "top": "20",
+          "right": "20",
+          "bottom": "80",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "e3e8e58",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 33.33,
+            "_css_classes": "item features-without-image mb-4 col-12 col-md-4 active"
+          },
+          "elements": [
+            {
+              "id": "29e932a",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Para Negócios",
+                "header_size": "h3",
+                "align": "center",
+                "_css_classes": "card-title mbr-fonts-style display-5"
+              },
+              "elements": []
+            },
+            {
+              "id": "1861f95",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<ul><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Mentorias Direcionadas</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Criação e Gestão de Conteúdos</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Gestão Ágil de Projetos</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Capacitações e Treinamentos</li></ul>"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "a561c2a",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 33.33,
+            "_css_classes": "item features-without-image mb-4 col-12 col-md-4"
+          },
+          "elements": [
+            {
+              "id": "8c1ee58",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Para Projetos",
+                "header_size": "h3",
+                "align": "center",
+                "_css_classes": "card-title mbr-fonts-style display-5"
+              },
+              "elements": []
+            },
+            {
+              "id": "eb24be2",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<ul><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Consultorias Estratégicas</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Gestão de Recursos</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Gestão de Processos</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Elaboração de Projetos e Conteúdos</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Planejamento e Monitoramento de Resultados</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Prestação de Contas e Relatórios de Execução</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Mapeamento Socioterritorial</li><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Assessoria técnica de execução da plataforma transferegov</li></ul>"
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "5ddfc50",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 33.33,
+            "_css_classes": "item features-without-image mb-4 col-12 col-md-4"
+          },
+          "elements": [
+            {
+              "id": "819a49f",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Mecanismos de Financiamento",
+                "header_size": "h3",
+                "align": "center",
+                "_css_classes": "card-title mbr-fonts-style display-5"
+              },
+              "elements": []
+            },
+            {
+              "id": "a08e414",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<ul><li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Leis de Incentivo ao Editais de Fomento</li></ul>"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "59fd998",
+      "elType": "section",
+      "isInner": false,
+      "settings": {
+        "custom_id": "form3-g",
+        "_css_classes": "form3 cid-upL4IZgkut",
+        "padding": {
+          "unit": "px",
+          "top": "60",
+          "right": "20",
+          "bottom": "80",
+          "left": "20",
+          "isLinked": false
+        }
+      },
+      "elements": [
+        {
+          "id": "c26c59f",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 60,
+            "_css_classes": "col-lg-7 col-12"
+          },
+          "elements": [
+            {
+              "id": "4714967",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Nossa Localização",
+                "header_size": "h2",
+                "_css_classes": "mbr-section-title mb-4 display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "d631dca",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "google_maps",
+              "settings": {
+                "address": "Av. Embaixador Abelardo Bueno, 3.500 - Sl 318 - Barra da Tijuca, Rio de Janeiro - RJ, 22775-040",
+                "zoom": {
+                  "unit": "px",
+                  "size": 15
+                },
+                "height": {
+                  "unit": "px",
+                  "size": 500
+                }
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "2cc75ae",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 40,
+            "_css_classes": "col-lg-3 offset-lg-1 mbr-form"
+          },
+          "elements": [
+            {
+              "id": "d30f5f7",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "heading",
+              "settings": {
+                "title": "Fale com um Consultor",
+                "header_size": "h2",
+                "_css_classes": "mbr-section-title mb-4 display-2"
+              },
+              "elements": []
+            },
+            {
+              "id": "ebe99fb",
+              "elType": "widget",
+              "isInner": false,
+              "widgetType": "text-editor",
+              "settings": {
+                "editor": "<form id=\"form\"><div class=\"mb-3\"><input type=\"text\" name=\"nome\" placeholder=\"Nome\" class=\"form-control\" required></div><div class=\"mb-3\"><input type=\"email\" name=\"email\" placeholder=\"Email\" class=\"form-control\" required></div><div class=\"mb-3\"><input type=\"tel\" name=\"telefone\" placeholder=\"Telefone\" class=\"form-control\" required></div><div class=\"mb-3\"><textarea name=\"mensagem\" id=\"mensagem\" placeholder=\"Fale sobre você\" class=\"form-control\" required></textarea></div><div><input type=\"submit\" id=\"button\" value=\"Enviar\" class=\"btn btn-black display-4\"></div></form>"
+              },
+              "elements": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

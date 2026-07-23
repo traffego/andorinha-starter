@@ -1,0 +1,232 @@
+{
+  "version": "0.4",
+  "title": "Andorinha One Page Template",
+  "type": "page",
+  "page_settings": {},
+  "content": [
+    {
+      "id": "a7b8c91",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "b8c9d02",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "c9d0e13",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"header19 cid-sFGzrhlvIh mbr-parallax-background\" id=\"header19-3\">\n    <div class=\"mbr-overlay\" style=\"opacity: 0.3; background-color: rgb(2, 8, 115);\"></div>\n    <div class=\"container-fluid\" style=\"margin-top: 150px;\">\n        <div class=\"media-container\" style=\"height: 450px;\">\n            <div class=\"col-md-12 col-lg-10 m-auto align-center\">\n                <h1 class=\"mbr-section-title mbr-white mbr-fonts-style mb-3 display-1\"><strong>Potencializando Impactos Positivos em Projetos e Negócios</strong></h1>\n                <p class=\"mbr-text mbr-white mbr-fonts-style display-7\"><em>A Andorinha Negócios Criativos transforma ideias em resultados, ampliando o alcance e o impacto de iniciativas socioeducacionais, culturais e sustentáveis.</em><br></p>\n                <div class=\"mbr-section-btn align-center\"><a class=\"btn btn-secondary display-4\" href=\"#image2-2\">Leia Mais</a></div>\n            </div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d0e1f24",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "e1f2a35",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "f2a3b46",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"image2 cid-upKTDVb5F8\" id=\"image2-2\">\n    <div class=\"container\">\n        <div class=\"row align-items-center\">\n            <div class=\"col-12 col-lg-6\">\n                <div class=\"image-wrapper\">\n                    <img src=\"assets/images/two-women-work-1256x838.jpg\" alt=\"Andorinha Trabalho em Equipe\">\n                </div>\n            </div>\n            <div class=\"col-12 col-lg\">\n                <div class=\"text-wrapper\">\n                    <p class=\"mbr-text mbr-fonts-style display-7\">A Andorinha Negócios Criativos atua no Planejamento das ações e dos resultados na Execução de Projetos Socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo.<br>Somos uma Empresa de Consultoria com foco em Gestão e Gerenciamento de Projeto contemplados em Editais, Leis de Incentivo e Transferências Diretas.<br>Nosso compromisso é com o impacto do resultado das ações pactuadas e para isso, atuamos na gestão dos processos, no monitoramento das ações, com aplicação de diversas ferramentas de avaliação e indicadores de resultados.</p>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a3b4c57",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "b4c5d68",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "c5d6e79",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"content4 cid-upKVXTMknx\" id=\"content4-5\">\n    <div class=\"container\">\n        <div class=\"row justify-content-center\">\n            <div class=\"title col-md-12 col-lg-10\">\n                <h3 class=\"mbr-section-title mbr-fonts-style align-center mb-4 display-2\"><strong>Quem Somos Nós</strong></h3>\n            </div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d6e7f80",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "e7f8a91",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "f8a9b02",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"content10 cid-upKW8yw6sP\" id=\"content10-6\">\n    <div class=\"container\">\n        <div class=\"row justify-content-center\">\n            <div class=\"col-12 col-md\">\n                <h5 class=\"mbr-section-title mbr-fonts-style mb-4 display-2\"><strong>Missão</strong></h5>\n            </div>\n            <div class=\"col-md-12 col-lg-6\">\n                <p class=\"mbr-text mbr-fonts-style display-7\">Nossa missão é potencializar o impacto positivo de projetos socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo, fornecendo soluções inovadoras e estratégicas de consultoria que promovam o desenvolvimento integral e sustentável dos territórios. Nos dedicamos a transformar ideias em ações concretas, criando parcerias colaborativas e sustentáveis que geram valor para a sociedade e o meio ambiente.</p>\n            </div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a9b0c13",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "b0c1d24",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "c1d2e35",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"content10 cid-upKWp2uQT9\" id=\"content10-7\">\n    <div class=\"container\">\n        <div class=\"row justify-content-center\">\n            <div class=\"col-12 col-md\">\n                <h5 class=\"mbr-section-title mbr-fonts-style mb-4 display-2\"><strong>Visão</strong></h5>\n            </div>\n            <div class=\"col-md-12 col-lg-6\">\n                <p class=\"mbr-text mbr-fonts-style display-7\">Ser a referência nacional em consultoria para gestão e desenvolvimento de projetos socioeducacionais, culturais, esportivos, de sustentabilidade e empreendedorismo, reconhecida pela excelência, inovação e compromisso com resultados duradouros. Aspiramos a ser um agente transformador, contribuindo para um futuro mais justo, inclusivo e sustentável para todos.</p>\n            </div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d2e3f46",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "e3f4a57",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "f4a5b68",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"content4 cid-upKWZA49jV\" id=\"content4-9\">\n    <div class=\"container\">\n        <div class=\"row justify-content-center\">\n            <div class=\"title col-md-12 col-lg-10\">\n                <h3 class=\"mbr-section-title mbr-fonts-style align-center mb-4 display-2\"><strong>Valores</strong></h3>\n            </div>\n        </div>\n    </div>\n</section>\n\n<section data-bs-version=\"5.1\" class=\"content8 cid-upKWEWI8r7\" id=\"content8-8\">\n    <div class=\"container\">\n        <div class=\"row justify-content-center\">\n            <div class=\"counter-container col-md-12 col-lg-10\">\n                <div class=\"mbr-text mbr-fonts-style display-7\">\n                    <ul>\n                        <li><strong>Inovação:</strong> Valorizamos a criatividade e a busca constante por soluções inovadoras que atendam às necessidades emergentes da sociedade e do meio ambiente.</li>\n                        <li><strong>Sustentabilidade:</strong> Comprometemo-nos com práticas que promovem a sustentabilidade ambiental, social e econômica em todos os nossos projetos e operações.</li>\n                        <li><strong>Excelência:</strong> Buscamos a excelência em tudo o que fazemos, garantindo a qualidade e a eficácia dos serviços que oferecemos.</li>\n                        <li><strong>Colaboração:</strong> Acreditamos no poder das parcerias e do trabalho em equipe, promovendo uma cultura de colaboração e cooperação com nossos clientes, parceiros e comunidades.</li>\n                        <li><strong>Impacto Social:</strong> Focamos em gerar impactos sociais positivos, melhorando a qualidade de vida das pessoas e fortalecendo as comunidades onde atuamos.</li>\n                        <li><strong>Ética e Transparência:</strong> Atuamos com integridade, ética e transparência, construindo relações de confiança e respeito com todos os stakeholders.</li>\n                        <li><strong>Inclusão:</strong> Defendemos a diversidade e a inclusão, garantindo oportunidades iguais e promovendo a participação de todos em nossos projetos e processos.</li>\n                    </ul>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "a5b6c79",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "b6c7d80",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "c7d8e91",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"content4 cid-upL1hJzG36\" id=\"content4-d\">\n    <div class=\"container\">\n        <div class=\"row justify-content-center\">\n            <div class=\"title col-md-12 col-lg-10\">\n                <h3 class=\"mbr-section-title mbr-fonts-style align-center mb-4 display-2\"><strong>Soluções Criativas para Projetos&nbsp;</strong></h3>\n            </div>\n        </div>\n    </div>\n</section>\n\n<section data-bs-version=\"5.1\" class=\"features5 cid-upL0XG62BF\" id=\"features5-c\">\n    <div class=\"container-fluid\">\n        <div class=\"row\">\n            <div class=\"item features-without-image mb-4 col-12 col-md-4 active\">\n                <div class=\"item-wrapper\">\n                    <div class=\"row\">\n                        <div class=\"col-12 col-md-12\">\n                            <div class=\"text-wrapper\">\n                                <h5 class=\"card-title mbr-fonts-style display-5\" style=\"text-align: center;\"><strong>Para Negócios</strong></h5>\n                                <ul>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Mentorias Direcionadas</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Criação e Gestão de Conteúdos</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Gestão Ágil de Projetos</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Capacitações e Treinamentos</li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"item features-without-image mb-4 col-12 col-md-4\">\n                <div class=\"item-wrapper\">\n                    <div class=\"row\">\n                        <div class=\"col-12 col-md-12\">\n                            <div class=\"text-wrapper\">\n                                <h5 class=\"card-title mbr-fonts-style display-5\" style=\"text-align: center;\"><strong>Para Projetos</strong></h5>\n                                <ul>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Consultorias Estratégicas</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Gestão de Recursos</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Gestão de Processos</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Elaboração de Projetos e Conteúdos</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Planejamento e Monitoramento de Resultados</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Prestação de Contas e Relatórios de Execução</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Mapeamento Socioterritorial</li>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Assessoria técnica de execução da plataforma transferegov</li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n            <div class=\"item features-without-image mb-4 col-12 col-md-4\">\n                <div class=\"item-wrapper\">\n                    <div class=\"row\">\n                        <div class=\"col-12 col-md-12\">\n                            <div class=\"text-wrapper\">\n                                <h5 class=\"card-title mbr-fonts-style display-5\" style=\"text-align: center;\"><strong>Mecanismos de Financiamento</strong></h5>\n                                <ul>\n                                    <li class=\"mbr-text mbr-fonts-style display-4\" style=\"text-align: justify;\"> Leis de Incentivo ao Editais de Fomento</li>\n                                </ul>\n                            </div>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d8e9f02",
+      "elType": "section",
+      "isInner": false,
+      "settings": {},
+      "elements": [
+        {
+          "id": "e9f0a13",
+          "elType": "column",
+          "isInner": false,
+          "settings": {
+            "_column_size": 100
+          },
+          "elements": [
+            {
+              "id": "f0a1b24",
+              "elType": "widget",
+              "isInner": false,
+              "settings": {
+                "html": "<section data-bs-version=\"5.1\" class=\"form3 cid-upL4IZgkut\" id=\"form3-g\">\n    <div class=\"container-fluid\">\n        <div class=\"row justify-content-center\">\n            <div class=\"col-lg-7 col-12 \">\n                <div class=\"image-wrapper\" style=\"height: 700px; padding-top: 50px\">\n                    <h1 class=\"mbr-section-title mb-4 display-2\"><strong>Nossa Localização</strong></h1>\n                    <div class=\"google-map\">\n                        <iframe frameborder=\"0\" style=\"border:0; height: 500px; width: 100%;\" src=\"https://www.google.com/maps/embed/v1/place?key=AIzaSyBQ55g-IgRRgXrd803PTWDTb7kd6aAitNQ&amp;q=Av. Embaixador Abelardo Bueno, 3.500 - Sl 318 - Barra da Tijuca, Rio de Janeiro - RJ, 22775-040\" allowfullscreen></iframe>\n                    </div>\n                </div>\n            </div>\n            <div class=\"col-lg-3 offset-lg-1 mbr-form\">\n                <form id=\"form\">\n                    <div class=\"row\">\n                        <div hidden=\"hidden\" data-form-alert class=\"alert alert-success col-12\" id=\"msg-success\">Obrigado por preencher o formulário!</div>\n                        <div hidden=\"hidden\" data-form-alert-danger class=\"alert alert-danger col-12\" id=\"msg-error\">Oops...! Algo deu errado. Tente novamente mais tarde.</div>\n                    </div>\n                    <div class=\"dragArea row\">\n                        <div class=\"col-lg-12 col-md-12 col-sm-12\">\n                            <h1 class=\"mbr-section-title mb-4 display-2\"><strong>Fale com um Consultor</strong></h1>\n                        </div>\n                        <div data-for=\"nome\" class=\"col-lg-12 col-md col-sm-12 form-group mb-3\">\n                            <input type=\"text\" name=\"nome\" placeholder=\"Nome\" data-form-field=\"nome\" class=\"form-control\" id=\"nome\" required>\n                        </div>\n                        <div class=\"col-lg-12 col-md col-sm-12 form-group mb-3\" data-for=\"email\">\n                            <input type=\"email\" name=\"email\" placeholder=\"Email\" data-form-field=\"email\" class=\"form-control\" id=\"email\" required>\n                        </div>\n                        <div class=\"col-lg-12 col-md col-sm-12 form-group mb-3\" data-for=\"phone\">\n                            <input type=\"tel\" name=\"telefone\" placeholder=\"Telefone\" data-form-field=\"telefone\" class=\"form-control\" id=\"telefone\" required>\n                        </div>\n                        <div class=\"col-lg-12 col-md col-sm-12 form-group mb-3\" data-for=\"mensagem\">\n                            <textarea name=\"mensagem\" id=\"mensagem\" placeholder=\"Fale sobre você\" class=\"form-control\" required></textarea>\n                        </div>\n                        <div class=\"col-md-auto col-12 mbr-section-btn\">\n                            <input type=\"submit\" id=\"button\" value=\"Enviar\" class=\"btn btn-black display-4\">\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div class=\"offset-lg-1\"></div>\n        </div>\n    </div>\n</section>"
+              },
+              "elements": [],
+              "widgetType": "html"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
