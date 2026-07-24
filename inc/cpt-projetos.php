@@ -67,7 +67,9 @@ add_filter( 'manage_projetos_posts_columns', 'andorinha_projetos_columns' );
 function andorinha_projetos_column_content( $column, $post_id ) {
     if ( $column === 'tipo' ) {
         $tipo = get_post_meta( $post_id, '_andorinha_tipo', true );
-        echo $tipo === 'evento' ? '<span style="color:#0073aa;font-weight:600;">🎯 Evento</span>' : '<span style="color:#46b450;font-weight:600;">📋 Projeto</span>';
+        echo $tipo === 'evento'
+            ? '<span style="color:#0073aa;font-weight:600;">Evento</span>'
+            : '<span style="color:#2e7d32;font-weight:600;">Projeto</span>';
     }
 }
 add_action( 'manage_projetos_posts_custom_column', 'andorinha_projetos_column_content', 10, 2 );
@@ -80,7 +82,7 @@ function andorinha_add_projetos_metaboxes() {
     // Meta Box: Tipo do Registro
     add_meta_box(
         'andorinha_projeto_tipo',
-        __( '⚙️ Tipo e Dados do Registro', 'andorinha-starter' ),
+        __( 'Tipo e Dados do Registro', 'andorinha-starter' ),
         'andorinha_render_tipo_metabox',
         'projetos',
         'normal',
@@ -90,7 +92,7 @@ function andorinha_add_projetos_metaboxes() {
     // Meta Box: Arquivos (PDF + Galeria)
     add_meta_box(
         'andorinha_projeto_midia',
-        __( '📁 Arquivos e Mídia', 'andorinha-starter' ),
+        __( 'Arquivos e Mídia', 'andorinha-starter' ),
         'andorinha_render_midia_metabox',
         'projetos',
         'normal',

@@ -45,6 +45,12 @@ function andorinha_enqueue_styles() {
         array(), null
     );
 
+    // 1b. Font Awesome 6 Free
+    wp_enqueue_style( 'font-awesome-6',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+        array(), '6.5.2'
+    );
+
     // 2. Bootstrap 5
     wp_enqueue_style( 'bootstrap',          $uri . '/assets/bootstrap/css/bootstrap.min.css',       array(), $v );
     wp_enqueue_style( 'bootstrap-grid',     $uri . '/assets/bootstrap/css/bootstrap-grid.min.css',  array(), $v );
@@ -128,12 +134,17 @@ function andorinha_elementor_editor_styles() {
         'https://fonts.googleapis.com/css?family=Epilogue:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap',
         array(), null
     );
+    wp_enqueue_style( 'font-awesome-6-editor',
+        'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+        array(), '6.5.2'
+    );
     wp_enqueue_style( 'bootstrap-editor',       $uri . '/assets/bootstrap/css/bootstrap.min.css',         array(), $v );
     wp_enqueue_style( 'mobirise-theme-editor',  $uri . '/assets/theme/css/style.css',                     array(), $v );
     wp_enqueue_style( 'mbr-additional-editor',  $uri . '/assets/mobirise/css/mbr-additional.css',         array(), $v );
     wp_enqueue_style( 'andorinha-main-editor',  get_stylesheet_uri(),                                     array(), $v );
 }
 add_action( 'elementor/editor/after_enqueue_styles', 'andorinha_elementor_editor_styles' );
+
 
 /* =============================================
    CLASSES CSS PARA ITENS DO MENU WP
