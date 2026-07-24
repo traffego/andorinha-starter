@@ -369,6 +369,7 @@ function andorinha_render_modal_js() {
 
             // ---- CAMPOS ----
             var fieldDefs = [
+                { icon:'fa-solid fa-calendar-days',    label:'Data',            key:'data_label' },
                 { icon:'fa-solid fa-file-contract',   label:'Termo de Fomento', key:'termo' },
                 { icon:'fa-solid fa-barcode',          label:'Cód. Objeto',     key:'objeto' },
                 { icon:'fa-solid fa-hashtag',          label:'Cód. Programa',   key:'programa' },
@@ -472,10 +473,14 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
     $galeria_ids   = get_post_meta( $post_id, '_andorinha_projeto_galeria', true );
     $video_url_raw = get_post_meta( $post_id, '_andorinha_video_url',      true );
     $video_arquivo = get_post_meta( $post_id, '_andorinha_video_arquivo',  true );
+    $data_tipo     = get_post_meta( $post_id, '_andorinha_data_tipo',      true ) ?: 'unica';
+    $data_unica    = get_post_meta( $post_id, '_andorinha_data_unica',     true );
+    $data_inicio   = get_post_meta( $post_id, '_andorinha_data_inicio',    true );
+    $data_fim      = get_post_meta( $post_id, '_andorinha_data_fim',       true );
     $img_card      = andorinha_get_projeto_image( $post_id, 'medium_large' );
     $img_modal     = andorinha_get_projeto_image( $post_id, 'large' );
 
-    // Resolver embed de vídeo: arquivo tem prioridade sobre URL
+    // Resolver embed de vídeo
     $video_embed  = '';
     $video_is_file = false;
     if ( ! empty( $video_arquivo ) ) {
@@ -483,6 +488,22 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
         $video_is_file = true;
     } elseif ( ! empty( $video_url_raw ) ) {
         $video_embed = andorinha_get_video_embed( $video_url_raw );
+    }
+
+    // Formatar data para exibição
+    $data_label = '';
+    if ( $tipo === 'evento' ) {
+        $fmt = function( $d ) {
+            if ( empty( $d ) ) return '';
+            $ts = strtotime( $d );
+            return $ts ? date_i18n( 'd/m/Y', $ts ) : $d;
+        };
+        if ( $data_tipo === 'periodo' && ( $data_inicio || $data_fim ) ) {
+            $partes = array_filter( array( $fmt( $data_inicio ), $fmt( $data_fim ) ) );
+            $data_label = implode( ' a ', $partes );
+        } elseif ( $data_unica ) {
+            $data_label = $fmt( $data_unica );
+        }
     }
 
     $tipo_label = $tipo === 'evento' ? 'Evento' : 'Projeto';
@@ -519,9 +540,11 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
         'gallery'       => $gallery_data,
         'video'         => $video_embed,
         'video_is_file' => $video_is_file,
+        'data_label'    => $data_label,
     );
 
     $resumo_fields = array();
+    if ( $data_label )    $resumo_fields[] = array( 'icon' => 'fa-solid fa-calendar-days',    'label' => 'Data',            'value' => $data_label );
     if ( $termo )         $resumo_fields[] = array( 'icon' => 'fa-solid fa-file-contract',   'label' => 'Termo de Fomento', 'value' => $termo );
     if ( $cod_objeto )    $resumo_fields[] = array( 'icon' => 'fa-solid fa-barcode',          'label' => 'Cód. Objeto',     'value' => $cod_objeto );
     if ( $cod_programa )  $resumo_fields[] = array( 'icon' => 'fa-solid fa-hashtag',          'label' => 'Cód. Programa',   'value' => $cod_programa );

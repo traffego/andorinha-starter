@@ -9,12 +9,34 @@ jQuery(document).ready(function($) {
         $('.andorinha-tipo-btn[data-tipo="' + tipo + '"]').addClass('active');
         var labelNome = tipo === 'evento' ? 'Descrição do Evento' : 'Descrição do Projeto';
         $('.andorinha-label-nome').text(labelNome);
+
+        // Mostrar/ocultar bloco de datas
+        if (tipo === 'evento') {
+            $('#andorinha-evento-datas').slideDown(180);
+        } else {
+            $('#andorinha-evento-datas').slideUp(180);
+        }
     }
     $(document).on('click', '.andorinha-tipo-btn', function() {
         $('#andorinha_tipo_hidden').val($(this).data('tipo'));
         updateTipoUI();
     });
     updateTipoUI();
+
+
+    /* =============================================
+       SELETOR DATA ÚNICA / PERÍODO
+    ============================================= */
+    $(document).on('click', '.andorinha-data-tipo-btn', function(e) {
+        e.preventDefault();
+        var dt = $(this).data('dt');
+        $('.andorinha-data-tipo-btn').removeClass('and-dt-active');
+        $(this).addClass('and-dt-active');
+        $('.andorinha-data-panel').removeClass('and-dp-active');
+        $('#andorinha_dp_' + dt).addClass('and-dp-active');
+        $('#andorinha_data_tipo').val(dt);
+    });
+
 
 
     /* =============================================

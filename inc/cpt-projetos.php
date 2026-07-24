@@ -114,6 +114,10 @@ function andorinha_render_tipo_metabox( $post ) {
     $cod_objeto    = get_post_meta( $post->ID, '_andorinha_cod_objeto',    true );
     $cod_programa  = get_post_meta( $post->ID, '_andorinha_cod_programa',  true );
     $nome_programa = get_post_meta( $post->ID, '_andorinha_nome_programa', true );
+    $data_tipo     = get_post_meta( $post->ID, '_andorinha_data_tipo',     true ) ?: 'unica';
+    $data_unica    = get_post_meta( $post->ID, '_andorinha_data_unica',    true );
+    $data_inicio   = get_post_meta( $post->ID, '_andorinha_data_inicio',   true );
+    $data_fim      = get_post_meta( $post->ID, '_andorinha_data_fim',      true );
     ?>
     <style>
         .andorinha-meta-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
@@ -133,6 +137,18 @@ function andorinha_render_tipo_metabox( $post ) {
         .andorinha-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .andorinha-section-title { font-size: 12px; font-weight: 700; text-transform: uppercase; color: #888; border-bottom: 1px solid #eee; padding-bottom: 6px; margin-bottom: 16px; letter-spacing: .5px; }
         #andorinha_tipo_hidden { display: none; }
+        /* Bloco de data do evento */
+        #andorinha-evento-datas { background: #f0f7ff; border: 1.5px solid #c3ddf5; border-radius: 8px; padding: 16px 18px; margin-bottom: 20px; }
+        #andorinha-evento-datas .andorinha-section-title { border-color: #c3ddf5; margin-bottom: 14px; color: #0073aa; }
+        .andorinha-data-tipo-selector { display: flex; gap: 10px; margin-bottom: 16px; }
+        .andorinha-data-tipo-btn { flex: 1; padding: 10px; border: 1.5px solid #c3ddf5; border-radius: 6px; background: #fff; cursor: pointer; text-align: center; font-size: 13px; font-weight: 600; color: #555; transition: all .2s; }
+        .andorinha-data-tipo-btn i { margin-right: 5px; }
+        .andorinha-data-tipo-btn:hover { border-color: #0073aa; color: #0073aa; background: #f0f7ff; }
+        .andorinha-data-tipo-btn.and-dt-active { border-color: #0073aa; background: #0073aa; color: #fff; }
+        .andorinha-data-panel { display: none; }
+        .andorinha-data-panel.and-dp-active { display: block; }
+        .andorinha-field input[type="date"] { width: 100%; border: 1px solid #ddd; border-radius: 4px; padding: 8px 10px; font-size: 14px; }
+        .andorinha-field input[type="date"]:focus { border-color: #0073aa; outline: none; box-shadow: 0 0 0 2px rgba(0,115,170,.15); }
     </style>
 
     <div class="andorinha-meta-box">
@@ -145,6 +161,47 @@ function andorinha_render_tipo_metabox( $post ) {
             </div>
             <div class="andorinha-tipo-btn <?php echo $tipo === 'evento' ? 'active' : ''; ?>" data-tipo="evento">
                 <i class="fa-solid fa-calendar-days"></i> Evento
+            </div>
+        </div>
+
+        <!-- Bloco de data — visível apenas para Evento -->
+        <div id="andorinha-evento-datas" style="<?php echo $tipo !== 'evento' ? 'display:none;' : ''; ?>">
+            <p class="andorinha-section-title"><i class="fa-solid fa-calendar-days" style="margin-right:6px;"></i>Data do Evento</p>
+
+            <!-- Seletor data única / período -->
+            <input type="hidden" id="andorinha_data_tipo" name="andorinha_data_tipo" value="<?php echo esc_attr( $data_tipo ); ?>" />
+            <div class="andorinha-data-tipo-selector">
+                <div class="andorinha-data-tipo-btn <?php echo $data_tipo === 'unica' ? 'and-dt-active' : ''; ?>" data-dt="unica">
+                    <i class="fa-solid fa-calendar-day"></i> Data Única
+                </div>
+                <div class="andorinha-data-tipo-btn <?php echo $data_tipo === 'periodo' ? 'and-dt-active' : ''; ?>" data-dt="periodo">
+                    <i class="fa-solid fa-calendar-range"></i> Período
+                </div>
+            </div>
+
+            <!-- Painel: Data Única -->
+            <div class="andorinha-data-panel <?php echo $data_tipo === 'unica' ? 'and-dp-active' : ''; ?>" id="andorinha_dp_unica">
+                <div class="andorinha-field">
+                    <label for="andorinha_data_unica">Data <em>(opcional)</em></label>
+                    <input type="date" id="andorinha_data_unica" name="andorinha_data_unica"
+                           value="<?php echo esc_attr( $data_unica ); ?>" />
+                </div>
+            </div>
+
+            <!-- Painel: Período -->
+            <div class="andorinha-data-panel <?php echo $data_tipo === 'periodo' ? 'and-dp-active' : ''; ?>" id="andorinha_dp_periodo">
+                <div class="andorinha-row">
+                    <div class="andorinha-field">
+                        <label for="andorinha_data_inicio">Data de Início <em>(opcional)</em></label>
+                        <input type="date" id="andorinha_data_inicio" name="andorinha_data_inicio"
+                               value="<?php echo esc_attr( $data_inicio ); ?>" />
+                    </div>
+                    <div class="andorinha-field">
+                        <label for="andorinha_data_fim">Data de Término <em>(opcional)</em></label>
+                        <input type="date" id="andorinha_data_fim" name="andorinha_data_fim"
+                               value="<?php echo esc_attr( $data_fim ); ?>" />
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -338,6 +395,10 @@ function andorinha_save_projeto_meta( $post_id ) {
         'andorinha_cod_programa'    => '_andorinha_cod_programa',
         'andorinha_nome_programa'   => '_andorinha_nome_programa',
         'andorinha_projeto_galeria' => '_andorinha_projeto_galeria',
+        'andorinha_data_tipo'       => '_andorinha_data_tipo',
+        'andorinha_data_unica'      => '_andorinha_data_unica',
+        'andorinha_data_inicio'     => '_andorinha_data_inicio',
+        'andorinha_data_fim'        => '_andorinha_data_fim',
     );
 
     foreach ( $text_fields as $post_key => $meta_key ) {
