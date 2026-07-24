@@ -1,6 +1,32 @@
 jQuery(document).ready(function($) {
 
     /* =============================================
+       SELETOR DE TIPO: PROJETO / EVENTO
+    ============================================= */
+    function updateTipoUI() {
+        var tipo = $('#andorinha_tipo_hidden').val() || 'projeto';
+
+        // Atualizar botões
+        $('.andorinha-tipo-btn').removeClass('active');
+        $('.andorinha-tipo-btn[data-tipo="' + tipo + '"]').addClass('active');
+
+        // Atualizar label da descrição
+        var labelNome = tipo === 'evento' ? 'Descrição do Evento' : 'Descrição do Projeto';
+        $('.andorinha-label-nome').text(labelNome);
+    }
+
+    // Clicar nos botões de tipo
+    $(document).on('click', '.andorinha-tipo-btn', function() {
+        var tipo = $(this).data('tipo');
+        $('#andorinha_tipo_hidden').val(tipo);
+        updateTipoUI();
+    });
+
+    // Inicializar UI
+    updateTipoUI();
+
+
+    /* =============================================
        UPLOAD PDF
     ============================================= */
     var pdfFrame;
@@ -14,7 +40,7 @@ jQuery(document).ready(function($) {
         }
 
         pdfFrame = wp.media({
-            title: 'Selecionar PDF do Projeto',
+            title: 'Selecionar PDF',
             button: { text: 'Usar este PDF' },
             library: { type: 'application/pdf' },
             multiple: false
@@ -37,17 +63,15 @@ jQuery(document).ready(function($) {
         $(this).hide();
     });
 
+
     /* =============================================
        UPLOAD GALERIA DE FOTOS
     ============================================= */
-    var galeriaFrame;
-
     $('#andorinha_upload_galeria_btn').on('click', function(e) {
         e.preventDefault();
 
-        // Sempre reabrir para permitir novas seleções
-        galeriaFrame = wp.media({
-            title: 'Selecionar Fotos do Projeto',
+        var galeriaFrame = wp.media({
+            title: 'Selecionar Fotos',
             button: { text: 'Adicionar à Galeria' },
             library: { type: 'image' },
             multiple: 'add'
@@ -56,7 +80,7 @@ jQuery(document).ready(function($) {
         galeriaFrame.on('select', function() {
             var selection = galeriaFrame.state().get('selection');
             var currentIds = $('#andorinha_projeto_galeria').val()
-                ? $('#andorinha_projeto_galeria').val().split(',').filter(function(v){ return v !== ''; })
+                ? $('#andorinha_projeto_galeria').val().split(',').filter(function(v) { return v !== ''; })
                 : [];
 
             selection.each(function(attachment) {
@@ -84,6 +108,7 @@ jQuery(document).ready(function($) {
         galeriaFrame.open();
     });
 
+
     /* =============================================
        REMOVER FOTO DA GALERIA
     ============================================= */
@@ -94,7 +119,7 @@ jQuery(document).ready(function($) {
         item.remove();
 
         var currentIds = $('#andorinha_projeto_galeria').val()
-            ? $('#andorinha_projeto_galeria').val().split(',').filter(function(v){ return v !== ''; })
+            ? $('#andorinha_projeto_galeria').val().split(',').filter(function(v) { return v !== ''; })
             : [];
         var newIds = currentIds.filter(function(id) { return id !== idToRemove; });
         $('#andorinha_projeto_galeria').val(newIds.join(','));
