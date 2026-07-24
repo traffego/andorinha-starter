@@ -76,6 +76,16 @@ function andorinha_enqueue_styles() {
 
     // 9. style.css do tema (variáveis + overrides)
     wp_enqueue_style( 'andorinha-main',     get_stylesheet_uri(),                      array(), $v );
+
+    // 10. Contact Form 7 — estilo do tema (carrega apenas quando o plugin está ativo)
+    if ( defined( 'WPCF7_VERSION' ) || class_exists( 'WPCF7' ) ) {
+        wp_enqueue_style(
+            'andorinha-cf7-style',
+            $uri . '/assets/css/cf7-style.css',
+            array( 'andorinha-main' ),
+            $v
+        );
+    }
 }
 add_action( 'wp_enqueue_scripts', 'andorinha_enqueue_styles' );
 
