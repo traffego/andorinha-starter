@@ -1,6 +1,7 @@
 <?php
 /**
  * Elementor Widget & Shortcode: Lista de Projetos Realizados
+ * com Modal de Detalhes
  *
  * @package AndorinhaStarter
  */
@@ -28,7 +29,7 @@ function andorinha_get_projeto_image( $post_id, $size = 'medium_large' ) {
 }
 
 // =============================================
-// 2. CSS EMBUTIDO
+// 2. CSS: GRID + CARDS + MODAL
 // =============================================
 function andorinha_projetos_widget_css() {
     static $printed = false;
@@ -36,141 +37,386 @@ function andorinha_projetos_widget_css() {
     $printed = true;
     ?>
     <style>
-    /* Grid */
-    .andorinha-projetos-grid { display: flex; flex-wrap: wrap; margin: -12px; }
-    .andorinha-col { padding: 12px; box-sizing: border-box; }
-    .andorinha-col-2 { width: 50%; }
-    .andorinha-col-3 { width: 33.333%; }
-    .andorinha-col-4 { width: 25%; }
-    @media (max-width: 900px) { .andorinha-col-3,.andorinha-col-4 { width: 50%; } }
-    @media (max-width: 600px) { .andorinha-col-2,.andorinha-col-3,.andorinha-col-4 { width: 100%; } }
+    /* ---- Grid ---- */
+    .andorinha-projetos-grid { display:flex; flex-wrap:wrap; margin:-12px; }
+    .andorinha-col { padding:12px; box-sizing:border-box; }
+    .andorinha-col-2 { width:50%; }
+    .andorinha-col-3 { width:33.333%; }
+    .andorinha-col-4 { width:25%; }
+    @media (max-width:900px){ .andorinha-col-3,.andorinha-col-4{ width:50%; } }
+    @media (max-width:600px){ .andorinha-col-2,.andorinha-col-3,.andorinha-col-4{ width:100%; } }
 
-    /* Card */
+    /* ---- Card ---- */
     .andorinha-projeto-card {
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 2px 14px rgba(0,0,0,.09);
-        background: #fff;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        transition: transform .25s, box-shadow .25s;
-        font-family: 'Epilogue', sans-serif;
+        border-radius:12px; overflow:hidden;
+        box-shadow:0 3px 16px rgba(0,0,0,.10);
+        background:#fff; display:flex; flex-direction:column; height:100%;
+        transition:transform .25s, box-shadow .25s;
+        font-family:'Epilogue',sans-serif;
     }
     .andorinha-projeto-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 28px rgba(0,0,0,.13);
+        transform:translateY(-5px);
+        box-shadow:0 12px 32px rgba(0,0,0,.14);
     }
-
-    /* Imagem */
     .andorinha-card-img-wrap {
-        position: relative;
-        height: 210px;
-        overflow: hidden;
-        background: #f4f4f4;
+        position:relative; height:210px; overflow:hidden; background:#f4f4f4;
     }
-    .andorinha-card-img-wrap a { display: block; height: 100%; }
     .andorinha-card-img-wrap img {
-        width: 100%; height: 100%;
-        object-fit: cover; display: block;
-        transition: transform .35s;
+        width:100%; height:100%; object-fit:cover; display:block;
+        transition:transform .35s;
     }
-    .andorinha-projeto-card:hover .andorinha-card-img-wrap img { transform: scale(1.05); }
-
+    .andorinha-projeto-card:hover .andorinha-card-img-wrap img { transform:scale(1.05); }
     .andorinha-card-no-img {
-        height: 100%;
-        display: flex; align-items: center; justify-content: center;
-        background: #f0f3f8;
-        color: #b0b8c9;
-        font-size: 48px;
+        height:100%; display:flex; align-items:center; justify-content:center;
+        background:linear-gradient(135deg,#f0f3f8,#e8ecf4); color:#b0b8c9; font-size:52px;
     }
-
-    /* Badge de tipo */
     .andorinha-tipo-badge {
-        position: absolute; top: 12px; left: 12px;
-        display: inline-flex; align-items: center; gap: 5px;
-        color: #fff;
-        font-size: 11px; font-weight: 700; letter-spacing: .4px;
-        padding: 4px 11px;
-        border-radius: 20px;
-        font-family: 'Epilogue', sans-serif;
-        line-height: 1.4;
+        position:absolute; top:12px; left:12px;
+        display:inline-flex; align-items:center; gap:5px;
+        color:#fff; font-size:11px; font-weight:700; letter-spacing:.4px;
+        padding:4px 12px; border-radius:20px;
+        font-family:'Epilogue',sans-serif;
     }
-    .andorinha-tipo-badge i { font-size: 10px; }
-
-    /* Corpo */
-    .andorinha-card-body { padding: 20px; display: flex; flex-direction: column; flex: 1; }
-
+    .andorinha-tipo-badge i { font-size:10px; }
+    .andorinha-card-body { padding:20px; display:flex; flex-direction:column; flex:1; }
     .andorinha-card-title {
-        font-size: 1.05rem; font-weight: 700;
-        margin: 0 0 10px; line-height: 1.35;
-        font-family: 'Epilogue', sans-serif;
+        font-size:1.05rem; font-weight:700; margin:0 0 10px; line-height:1.35;
+        font-family:'Epilogue',sans-serif; color:#1a1a2e;
     }
-    .andorinha-card-title a { text-decoration: none; color: #1a1a2e; }
-    .andorinha-card-title a:hover { color: #020873; }
-
     .andorinha-card-desc {
-        font-size: .92rem; color: #555;
-        line-height: 1.65; margin: 0 0 14px;
-        flex-grow: 1;
+        font-size:.92rem; color:#555; line-height:1.65; margin:0 0 14px; flex-grow:1;
     }
-
-    /* Campos resumo */
     .andorinha-card-meta {
-        list-style: none; margin: 0 0 16px; padding: 0;
-        border-top: 1px solid #f0f0f0; padding-top: 13px;
+        list-style:none; margin:0 0 16px; padding:0;
+        border-top:1px solid #f0f0f0; padding-top:13px;
     }
     .andorinha-card-meta li {
-        display: flex; align-items: flex-start; gap: 7px;
-        font-size: .82rem; margin-bottom: 6px;
-        line-height: 1.4; color: #444;
+        display:flex; align-items:flex-start; gap:7px;
+        font-size:.82rem; margin-bottom:6px; line-height:1.4; color:#444;
     }
-    .andorinha-card-meta li i {
-        font-size: 12px; color: #020873;
-        margin-top: 2px; flex-shrink: 0; width: 14px; text-align: center;
-    }
-    .andorinha-meta-label {
-        font-weight: 700; color: #666;
-        white-space: nowrap; min-width: 90px;
-    }
-    .andorinha-meta-value { color: #232323; }
-
-    /* Ações */
+    .andorinha-card-meta li i { font-size:12px; color:#020873; margin-top:2px; flex-shrink:0; width:14px; text-align:center; }
+    .andorinha-meta-label { font-weight:700; color:#666; white-space:nowrap; min-width:90px; }
+    .andorinha-meta-value { color:#232323; }
     .andorinha-card-actions {
-        display: flex; gap: 8px; align-items: center;
-        margin-top: auto; padding-top: 14px;
-        border-top: 1px solid #f0f0f0;
+        display:flex; gap:8px; align-items:center;
+        margin-top:auto; padding-top:14px; border-top:1px solid #f0f0f0;
     }
-    .andorinha-btn-detail {
-        display: inline-flex; align-items: center; gap: 6px;
-        padding: 8px 18px;
-        background: #020873; color: #fff !important;
-        border-radius: 5px; font-size: .84rem; font-weight: 600;
-        text-decoration: none;
-        transition: background .2s;
-        font-family: 'Epilogue', sans-serif;
+    .andorinha-btn-modal {
+        display:inline-flex; align-items:center; gap:6px;
+        padding:9px 20px; background:#020873; color:#fff !important;
+        border-radius:6px; font-size:.84rem; font-weight:700;
+        text-decoration:none; cursor:pointer; border:none;
+        transition:background .2s, transform .15s;
+        font-family:'Epilogue',sans-serif; letter-spacing:.2px;
     }
-    .andorinha-btn-detail i { font-size: 12px; }
-    .andorinha-btn-detail:hover { background: #030a8c; }
+    .andorinha-btn-modal:hover { background:#030a8c; transform:scale(1.03); }
+    .andorinha-btn-pdf-card {
+        display:inline-flex; align-items:center; gap:6px;
+        padding:9px 14px; background:#fef2f2; color:#c0392b !important;
+        border-radius:6px; font-size:.84rem; font-weight:700;
+        text-decoration:none; border:1px solid #fecaca;
+        transition:background .2s;
+        font-family:'Epilogue',sans-serif;
+    }
+    .andorinha-btn-pdf-card:hover { background:#fee2e2; }
 
-    .andorinha-btn-pdf {
-        display: inline-flex; align-items: center; gap: 6px;
-        padding: 8px 14px;
-        background: #fef2f2; color: #c0392b !important;
-        border-radius: 5px; font-size: .84rem; font-weight: 600;
-        text-decoration: none;
-        border: 1px solid #fecaca;
-        transition: background .2s;
-        font-family: 'Epilogue', sans-serif;
+    /* ============================================================
+       MODAL
+    ============================================================ */
+    .and-modal-overlay {
+        display:none; position:fixed; inset:0; z-index:99999;
+        background:rgba(5,8,50,.72);
+        backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+        align-items:center; justify-content:center;
+        padding:20px; box-sizing:border-box;
     }
-    .andorinha-btn-pdf i { font-size: 12px; }
-    .andorinha-btn-pdf:hover { background: #fee2e2; }
+    .and-modal-overlay.and-open { display:flex; }
+
+    .and-modal {
+        background:#fff; border-radius:18px;
+        width:100%; max-width:820px; max-height:90vh;
+        overflow:hidden; display:flex; flex-direction:column;
+        box-shadow:0 40px 100px rgba(0,0,0,.45);
+        animation:andModalIn .35s cubic-bezier(.22,.68,0,1.2) both;
+        position:relative; font-family:'Epilogue',sans-serif;
+    }
+    @keyframes andModalIn {
+        from { opacity:0; transform:scale(.88) translateY(30px); }
+        to   { opacity:1; transform:scale(1)  translateY(0); }
+    }
+    .and-modal-close {
+        position:absolute; top:16px; right:18px; z-index:10;
+        background:rgba(255,255,255,.9); border:none; border-radius:50%;
+        width:36px; height:36px; cursor:pointer;
+        display:flex; align-items:center; justify-content:center;
+        font-size:16px; color:#555; box-shadow:0 2px 8px rgba(0,0,0,.18);
+        transition:background .2s, transform .15s;
+    }
+    .and-modal-close:hover { background:#fff; color:#020873; transform:scale(1.1); }
+
+    /* Hero image do modal */
+    .and-modal-hero {
+        position:relative; height:260px; overflow:hidden; flex-shrink:0;
+        background:linear-gradient(135deg,#020873,#149dcc);
+    }
+    .and-modal-hero img {
+        width:100%; height:100%; object-fit:cover; display:block; opacity:.92;
+    }
+    .and-modal-hero-overlay {
+        position:absolute; inset:0;
+        background:linear-gradient(to top, rgba(2,8,115,.85) 0%, transparent 60%);
+    }
+    .and-modal-hero-content {
+        position:absolute; bottom:0; left:0; right:0; padding:24px 28px;
+    }
+    .and-modal-badge {
+        display:inline-flex; align-items:center; gap:5px;
+        color:#fff; font-size:11px; font-weight:700; padding:4px 12px;
+        border-radius:20px; margin-bottom:10px; letter-spacing:.4px;
+    }
+    .and-modal-badge i { font-size:10px; }
+    .and-modal-title {
+        font-size:1.55rem; font-weight:800; color:#fff;
+        line-height:1.25; margin:0; text-shadow:0 2px 6px rgba(0,0,0,.25);
+    }
+
+    /* Corpo do modal */
+    .and-modal-body { padding:28px; overflow-y:auto; flex:1; }
+
+    .and-modal-desc {
+        font-size:.97rem; color:#444; line-height:1.75;
+        margin:0 0 22px; border-bottom:1px solid #f0f0f0; padding-bottom:20px;
+    }
+
+    /* Fields grid */
+    .and-modal-fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
+    @media (max-width:560px){ .and-modal-fields { grid-template-columns:1fr; } }
+    .and-modal-field {
+        background:#f8f9fc; border-radius:8px; padding:12px 14px;
+        border-left:3px solid #020873;
+    }
+    .and-modal-field-label {
+        display:flex; align-items:center; gap:6px;
+        font-size:.75rem; font-weight:700; text-transform:uppercase;
+        letter-spacing:.5px; color:#020873; margin-bottom:5px;
+    }
+    .and-modal-field-label i { font-size:11px; }
+    .and-modal-field-value { font-size:.93rem; color:#232323; font-weight:600; }
+
+    /* Galeria modal */
+    .and-modal-gallery-title {
+        font-size:.78rem; font-weight:700; text-transform:uppercase;
+        letter-spacing:.6px; color:#888; margin:0 0 12px;
+        display:flex; align-items:center; gap:7px;
+    }
+    .and-modal-gallery-title::after {
+        content:''; flex:1; height:1px; background:#eee;
+    }
+    .and-modal-gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:8px; margin-bottom:24px; }
+    .and-modal-gallery a { display:block; border-radius:6px; overflow:hidden; aspect-ratio:1; }
+    .and-modal-gallery img {
+        width:100%; height:100%; object-fit:cover; display:block;
+        transition:transform .3s, opacity .3s;
+    }
+    .and-modal-gallery a:hover img { transform:scale(1.08); opacity:.9; }
+
+    /* Footer do modal */
+    .and-modal-footer {
+        padding:16px 28px; border-top:1px solid #f0f0f0;
+        display:flex; align-items:center; gap:10px; flex-shrink:0;
+        background:#fafafa;
+    }
+    .and-modal-btn-pdf {
+        display:inline-flex; align-items:center; gap:7px;
+        padding:11px 22px; background:#c0392b; color:#fff !important;
+        border-radius:7px; font-size:.88rem; font-weight:700;
+        text-decoration:none; transition:background .2s;
+        font-family:'Epilogue',sans-serif;
+    }
+    .and-modal-btn-pdf:hover { background:#a93226; }
+    .and-modal-btn-close {
+        display:inline-flex; align-items:center; gap:7px;
+        padding:11px 22px; background:#f0f0f0; color:#555 !important;
+        border-radius:7px; font-size:.88rem; font-weight:700;
+        cursor:pointer; border:none; transition:background .2s;
+        font-family:'Epilogue',sans-serif;
+    }
+    .and-modal-btn-close:hover { background:#e0e0e0; }
+
+    /* Sem imagem hero */
+    .and-modal-hero-no-img {
+        height:160px; display:flex; align-items:center; justify-content:center;
+        font-size:60px; color:rgba(255,255,255,.5);
+    }
     </style>
     <?php
 }
 
 // =============================================
-// 3. RENDERIZAR CARD INDIVIDUAL
+// 3. HTML DA MODAL GLOBAL (renderizada 1x)
+// =============================================
+function andorinha_render_modal_html() {
+    static $done = false;
+    if ( $done ) return;
+    $done = true;
+    ?>
+    <div class="and-modal-overlay" id="andModalOverlay" role="dialog" aria-modal="true">
+        <div class="and-modal" id="andModal">
+            <button class="and-modal-close" id="andModalClose" aria-label="Fechar">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <!-- Hero -->
+            <div class="and-modal-hero" id="andModalHero"></div>
+
+            <!-- Corpo -->
+            <div class="and-modal-body" id="andModalBody">
+                <p class="and-modal-desc" id="andModalDesc"></p>
+                <div class="and-modal-fields" id="andModalFields"></div>
+                <div id="andModalGalleryWrap"></div>
+            </div>
+
+            <!-- Footer -->
+            <div class="and-modal-footer" id="andModalFooter">
+                <button class="and-modal-btn-close" id="andModalBtnClose">
+                    <i class="fa-solid fa-xmark"></i> Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+    <?php
+}
+
+// =============================================
+// 4. JS DA MODAL (renderizado 1x)
+// =============================================
+function andorinha_render_modal_js() {
+    static $done = false;
+    if ( $done ) return;
+    $done = true;
+    ?>
+    <script>
+    (function(){
+        var overlay  = document.getElementById('andModalOverlay');
+        var modal    = document.getElementById('andModal');
+        var hero     = document.getElementById('andModalHero');
+        var body     = document.getElementById('andModalBody');
+        var desc     = document.getElementById('andModalDesc');
+        var fields   = document.getElementById('andModalFields');
+        var galWrap  = document.getElementById('andModalGalleryWrap');
+        var footer   = document.getElementById('andModalFooter');
+
+        function openModal(data) {
+            // ---- HERO ----
+            var heroContent = '<div class="and-modal-hero-overlay"></div>';
+            if (data.img) {
+                hero.innerHTML = '<img src="'+data.img+'" alt="'+esc(data.title)+'" />'
+                    + heroContent
+                    + '<div class="and-modal-hero-content">'
+                    + '<div class="and-modal-badge" style="background:'+data.tipo_bg+';">'
+                    + '<i class="'+data.tipo_icon+'"></i> '+esc(data.tipo_label)
+                    + '</div>'
+                    + '<h2 class="and-modal-title">'+esc(data.title)+'</h2>'
+                    + '</div>';
+            } else {
+                hero.innerHTML = '<div style="background:linear-gradient(135deg,#020873,#149dcc);height:100%;position:relative;">'
+                    + '<div class="and-modal-hero-no-img"><i class="'+data.tipo_icon+'"></i></div>'
+                    + heroContent
+                    + '<div class="and-modal-hero-content">'
+                    + '<div class="and-modal-badge" style="background:'+data.tipo_bg+';">'
+                    + '<i class="'+data.tipo_icon+'"></i> '+esc(data.tipo_label)
+                    + '</div>'
+                    + '<h2 class="and-modal-title">'+esc(data.title)+'</h2>'
+                    + '</div></div>';
+            }
+
+            // ---- DESCRIÇÃO ----
+            if (data.desc) {
+                desc.style.display = '';
+                desc.textContent = data.desc;
+            } else {
+                desc.style.display = 'none';
+            }
+
+            // ---- CAMPOS ----
+            var fieldDefs = [
+                { icon:'fa-solid fa-file-contract',   label:'Termo de Fomento', key:'termo' },
+                { icon:'fa-solid fa-barcode',          label:'Cód. Objeto',     key:'objeto' },
+                { icon:'fa-solid fa-hashtag',          label:'Cód. Programa',   key:'programa' },
+                { icon:'fa-solid fa-building-columns', label:'Programa',         key:'nome_programa' }
+            ];
+            var fieldsHtml = '';
+            fieldDefs.forEach(function(f){
+                if (data[f.key]) {
+                    fieldsHtml += '<div class="and-modal-field">'
+                        + '<div class="and-modal-field-label"><i class="'+f.icon+'"></i>'+f.label+'</div>'
+                        + '<div class="and-modal-field-value">'+esc(data[f.key])+'</div>'
+                        + '</div>';
+                }
+            });
+            fields.innerHTML = fieldsHtml;
+
+            // ---- GALERIA ----
+            galWrap.innerHTML = '';
+            if (data.gallery && data.gallery.length) {
+                var galHtml = '<p class="and-modal-gallery-title"><i class="fa-solid fa-images" style="margin-right:6px;color:#020873;"></i>Galeria de Fotos</p>'
+                    + '<div class="and-modal-gallery">';
+                data.gallery.forEach(function(g){
+                    galHtml += '<a href="'+g.full+'" target="_blank">'
+                        + '<img src="'+g.thumb+'" alt="" loading="lazy" />'
+                        + '</a>';
+                });
+                galHtml += '</div>';
+                galWrap.innerHTML = galHtml;
+            }
+
+            // ---- FOOTER ----
+            var footerHtml = '<button class="and-modal-btn-close" id="andModalBtnClose"><i class="fa-solid fa-xmark"></i> Fechar</button>';
+            if (data.pdf) {
+                footerHtml = '<a href="'+data.pdf+'" target="_blank" class="and-modal-btn-pdf">'
+                    + '<i class="fa-solid fa-file-pdf"></i> Download PDF'
+                    + '</a>' + footerHtml;
+            }
+            footer.innerHTML = footerHtml;
+            document.getElementById('andModalBtnClose').addEventListener('click', closeModal);
+
+            overlay.classList.add('and-open');
+            document.body.style.overflow = 'hidden';
+            modal.querySelector('.and-modal-body').scrollTop = 0;
+        }
+
+        function closeModal() {
+            overlay.classList.remove('and-open');
+            document.body.style.overflow = '';
+        }
+
+        function esc(str) {
+            var d = document.createElement('div');
+            d.appendChild(document.createTextNode(str||''));
+            return d.innerHTML;
+        }
+
+        // Fechar ao clicar no overlay ou botão fechar
+        overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+        document.getElementById('andModalClose').addEventListener('click', closeModal);
+        document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+
+        // Delegação: clicar em qualquer botão de abrir modal
+        document.addEventListener('click', function(e){
+            var btn = e.target.closest('.andorinha-btn-modal');
+            if (!btn) return;
+            e.preventDefault();
+            var raw = btn.getAttribute('data-projeto');
+            if (!raw) return;
+            try { openModal(JSON.parse(raw)); } catch(err){ console.error('Modal data error', err); }
+        });
+    })();
+    </script>
+    <?php
+}
+
+// =============================================
+// 5. RENDERIZAR CARD
 // =============================================
 function andorinha_render_projeto_card( $post_id, $col_class ) {
     $tipo          = get_post_meta( $post_id, '_andorinha_tipo',          true ) ?: 'projeto';
@@ -180,14 +426,44 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
     $cod_programa  = get_post_meta( $post_id, '_andorinha_cod_programa',  true );
     $nome_programa = get_post_meta( $post_id, '_andorinha_nome_programa', true );
     $pdf_url       = get_post_meta( $post_id, '_andorinha_projeto_pdf',   true );
-    $img_url       = andorinha_get_projeto_image( $post_id );
+    $galeria_ids   = get_post_meta( $post_id, '_andorinha_projeto_galeria', true );
+    $img_card      = andorinha_get_projeto_image( $post_id, 'medium_large' );
+    $img_modal     = andorinha_get_projeto_image( $post_id, 'large' );
 
     $tipo_label = $tipo === 'evento' ? 'Evento' : 'Projeto';
     $tipo_icon  = $tipo === 'evento' ? 'fa-solid fa-calendar-days' : 'fa-solid fa-diagram-project';
     $tipo_bg    = $tipo === 'evento' ? '#0073aa' : '#2e7d32';
-    $no_img_icon = $tipo === 'evento' ? 'fa-solid fa-calendar-days' : 'fa-solid fa-diagram-project';
 
-    // Mapa de ícones por campo
+    // Montar galeria para a modal
+    $gallery_data = array();
+    if ( ! empty( $galeria_ids ) ) {
+        $ids = array_filter( explode( ',', $galeria_ids ) );
+        foreach ( $ids as $gid ) {
+            $gid   = trim( $gid );
+            $thumb = wp_get_attachment_image_url( $gid, 'thumbnail' );
+            $full  = wp_get_attachment_image_url( $gid, 'large' );
+            if ( $thumb && $full ) {
+                $gallery_data[] = array( 'thumb' => $thumb, 'full' => $full );
+            }
+        }
+    }
+
+    // Dados para a modal (JSON no data attribute)
+    $modal_data = array(
+        'title'         => get_the_title( $post_id ),
+        'tipo_label'    => $tipo_label,
+        'tipo_icon'     => $tipo_icon,
+        'tipo_bg'       => $tipo_bg,
+        'img'           => $img_modal,
+        'desc'          => $descricao,
+        'termo'         => $termo,
+        'objeto'        => $cod_objeto,
+        'programa'      => $cod_programa,
+        'nome_programa' => $nome_programa,
+        'pdf'           => $pdf_url,
+        'gallery'       => $gallery_data,
+    );
+
     $resumo_fields = array();
     if ( $termo )         $resumo_fields[] = array( 'icon' => 'fa-solid fa-file-contract',   'label' => 'Termo de Fomento', 'value' => $termo );
     if ( $cod_objeto )    $resumo_fields[] = array( 'icon' => 'fa-solid fa-barcode',          'label' => 'Cód. Objeto',     'value' => $cod_objeto );
@@ -199,42 +475,32 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
     <div class="<?php echo esc_attr( $col_class ); ?>">
         <div class="andorinha-projeto-card">
 
-            <!-- Imagem / placeholder -->
             <div class="andorinha-card-img-wrap">
-                <?php if ( $img_url ) : ?>
-                    <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">
-                        <img src="<?php echo esc_url( $img_url ); ?>"
-                             alt="<?php echo esc_attr( get_the_title( $post_id ) ); ?>" />
-                    </a>
+                <?php if ( $img_card ) : ?>
+                    <img src="<?php echo esc_url( $img_card ); ?>"
+                         alt="<?php echo esc_attr( get_the_title( $post_id ) ); ?>" />
                 <?php else : ?>
                     <div class="andorinha-card-no-img">
-                        <i class="<?php echo esc_attr( $no_img_icon ); ?>"></i>
+                        <i class="<?php echo esc_attr( $tipo_icon ); ?>"></i>
                     </div>
                 <?php endif; ?>
-
-                <!-- Badge de tipo -->
                 <div class="andorinha-tipo-badge" style="background:<?php echo esc_attr( $tipo_bg ); ?>;">
                     <i class="<?php echo esc_attr( $tipo_icon ); ?>"></i>
                     <?php echo esc_html( $tipo_label ); ?>
                 </div>
             </div>
 
-            <!-- Corpo -->
             <div class="andorinha-card-body">
-
                 <h4 class="andorinha-card-title">
-                    <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>">
-                        <?php echo esc_html( get_the_title( $post_id ) ); ?>
-                    </a>
+                    <?php echo esc_html( get_the_title( $post_id ) ); ?>
                 </h4>
 
                 <?php if ( $descricao ) : ?>
                     <p class="andorinha-card-desc">
-                        <?php echo esc_html( wp_trim_words( $descricao, 20, '...' ) ); ?>
+                        <?php echo esc_html( wp_trim_words( $descricao, 18, '...' ) ); ?>
                     </p>
                 <?php endif; ?>
 
-                <!-- Campos resumo -->
                 <?php if ( ! empty( $resumo_fields ) ) : ?>
                     <ul class="andorinha-card-meta">
                         <?php foreach ( $resumo_fields as $f ) : ?>
@@ -247,18 +513,21 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
                     </ul>
                 <?php endif; ?>
 
-                <!-- Botões -->
                 <div class="andorinha-card-actions">
-                    <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>" class="andorinha-btn-detail">
-                        <i class="fa-solid fa-arrow-right"></i> Ver detalhes
-                    </a>
+                    <!-- Botão abre modal -->
+                    <button
+                        class="andorinha-btn-modal"
+                        data-projeto="<?php echo esc_attr( wp_json_encode( $modal_data ) ); ?>"
+                    >
+                        <i class="fa-solid fa-magnifying-glass"></i> Ver detalhes
+                    </button>
+
                     <?php if ( ! empty( $pdf_url ) ) : ?>
-                        <a href="<?php echo esc_url( $pdf_url ); ?>" target="_blank" class="andorinha-btn-pdf">
+                        <a href="<?php echo esc_url( $pdf_url ); ?>" target="_blank" class="andorinha-btn-pdf-card">
                             <i class="fa-solid fa-file-pdf"></i> PDF
                         </a>
                     <?php endif; ?>
                 </div>
-
             </div>
         </div>
     </div>
@@ -267,7 +536,7 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
 }
 
 // =============================================
-// 4. FUNÇÃO PRINCIPAL DA GRADE
+// 6. FUNÇÃO PRINCIPAL DA GRADE
 // =============================================
 function andorinha_render_projetos_grid( $posts_per_page = 6, $columns = 3, $tipo_filtro = 'todos' ) {
     $query_args = array(
@@ -279,25 +548,26 @@ function andorinha_render_projetos_grid( $posts_per_page = 6, $columns = 3, $tip
     );
 
     if ( in_array( $tipo_filtro, array( 'projeto', 'evento' ), true ) ) {
-        $query_args['meta_query'] = array(
-            array(
-                'key'     => '_andorinha_tipo',
-                'value'   => $tipo_filtro,
-                'compare' => '=',
-            ),
-        );
+        $query_args['meta_query'] = array( array(
+            'key'     => '_andorinha_tipo',
+            'value'   => $tipo_filtro,
+            'compare' => '=',
+        ) );
     }
 
     $query = new WP_Query( $query_args );
 
     if ( ! $query->have_posts() ) {
-        return '<p style="text-align:center;color:#888;padding:30px 0;font-family:\'Epilogue\',sans-serif;"><i class="fa-solid fa-folder-open" style="margin-right:6px;"></i>Nenhum item encontrado.</p>';
+        return '<p style="text-align:center;color:#888;padding:30px 0;font-family:\'Epilogue\',sans-serif;">'
+             . '<i class="fa-solid fa-folder-open" style="margin-right:6px;"></i>Nenhum item encontrado.</p>';
     }
 
     $col_class = 'andorinha-col andorinha-col-' . intval( $columns );
 
     ob_start();
     andorinha_projetos_widget_css();
+    andorinha_render_modal_html();
+
     echo '<div class="andorinha-projetos-widget-wrapper"><div class="andorinha-projetos-grid">';
     while ( $query->have_posts() ) {
         $query->the_post();
@@ -305,11 +575,13 @@ function andorinha_render_projetos_grid( $posts_per_page = 6, $columns = 3, $tip
     }
     echo '</div></div>';
     wp_reset_postdata();
+
+    andorinha_render_modal_js();
     return ob_get_clean();
 }
 
 // =============================================
-// 5. SHORTCODE
+// 7. SHORTCODE
 // =============================================
 function andorinha_projetos_shortcode( $atts ) {
     $atts = shortcode_atts( array(
@@ -321,40 +593,35 @@ function andorinha_projetos_shortcode( $atts ) {
 }
 add_shortcode( 'andorinha_projetos', 'andorinha_projetos_shortcode' );
 
-
 // =============================================
-// 6. CATEGORIA ELEMENTOR
+// 8. CATEGORIA ELEMENTOR
 // =============================================
-add_action( 'elementor/elements/categories_registered', function( $elements_manager ) {
-    $elements_manager->add_category( 'andorinha-category', array(
+add_action( 'elementor/elements/categories_registered', function( $em ) {
+    $em->add_category( 'andorinha-category', array(
         'title' => __( 'Andorinha', 'andorinha-starter' ),
         'icon'  => 'fa fa-plug',
     ) );
 } );
 
-
 // =============================================
-// 7. WIDGET ELEMENTOR
+// 9. WIDGET ELEMENTOR
 // =============================================
 add_action( 'elementor/init', function() {
-
     if ( ! class_exists( '\Elementor\Widget_Base' ) ) return;
 
     if ( ! class_exists( 'Andorinha_Projetos_Elementor_Widget' ) ) {
         class Andorinha_Projetos_Elementor_Widget extends \Elementor\Widget_Base {
-
             public function get_name()       { return 'andorinha_projetos_grid'; }
             public function get_title()      { return __( 'Lista de Projetos (Andorinha)', 'andorinha-starter' ); }
             public function get_icon()       { return 'eicon-posts-grid'; }
             public function get_categories() { return array( 'andorinha-category', 'general' ); }
-            public function get_keywords()   { return array( 'projetos', 'eventos', 'andorinha', 'lista', 'grid', 'portfolio' ); }
+            public function get_keywords()   { return array( 'projetos', 'eventos', 'andorinha', 'lista', 'grid', 'portfolio', 'modal' ); }
 
             protected function register_controls() {
                 $this->start_controls_section( 'content_section', array(
                     'label' => __( 'Configurações', 'andorinha-starter' ),
                     'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
                 ) );
-
                 $this->add_control( 'tipo_filtro', array(
                     'label'   => __( 'Exibir', 'andorinha-starter' ),
                     'type'    => \Elementor\Controls_Manager::SELECT,
@@ -365,20 +632,17 @@ add_action( 'elementor/init', function() {
                         'evento'  => __( 'Somente Eventos', 'andorinha-starter' ),
                     ),
                 ) );
-
                 $this->add_control( 'posts_per_page', array(
                     'label'   => __( 'Quantidade', 'andorinha-starter' ),
                     'type'    => \Elementor\Controls_Manager::NUMBER,
-                    'min'     => 1, 'max' => 24, 'step' => 1, 'default' => 6,
+                    'min' => 1, 'max' => 24, 'step' => 1, 'default' => 6,
                 ) );
-
                 $this->add_control( 'columns', array(
                     'label'   => __( 'Colunas', 'andorinha-starter' ),
                     'type'    => \Elementor\Controls_Manager::SELECT,
                     'default' => '3',
                     'options' => array( '2' => '2 Colunas', '3' => '3 Colunas', '4' => '4 Colunas' ),
                 ) );
-
                 $this->end_controls_section();
             }
 
@@ -395,7 +659,7 @@ add_action( 'elementor/init', function() {
 
     $reg = function( $wm ) {
         $w = new Andorinha_Projetos_Elementor_Widget();
-        if ( method_exists( $wm, 'register' ) )             $wm->register( $w );
+        if ( method_exists( $wm, 'register' ) )                 $wm->register( $w );
         elseif ( method_exists( $wm, 'register_widget_type' ) ) $wm->register_widget_type( $w );
     };
     add_action( 'elementor/widgets/register',           $reg );
