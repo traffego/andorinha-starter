@@ -144,9 +144,14 @@ function andorinha_projetos_widget_css() {
     .and-modal-overlay {
         display:none; position:fixed; inset:0; z-index:99999;
         background:rgba(5,8,50,.72);
-        backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
         align-items:center; justify-content:center;
         padding:20px; box-sizing:border-box;
+    }
+    /* Blur via pseudo-element para NÃO criar stacking context no overlay */
+    .and-modal-overlay::before {
+        content:''; position:fixed; inset:0; z-index:-1;
+        backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
+        pointer-events:none;
     }
     .and-modal-overlay.and-open { display:flex; }
 
@@ -550,9 +555,11 @@ function andorinha_render_modal_js() {
         function navigate(dir) { showIvImage(ivIndex + dir); }
 
         if (viewer) {
+            // Mover viewer para body root — evita qualquer stacking context do overlay
+            document.body.appendChild(viewer);
             document.getElementById('andIvClose').addEventListener('click', closeViewer);
-            ivPrev.addEventListener('click', function(){ navigate(-1); });
-            ivNext.addEventListener('click', function(){ navigate(1); });
+            ivPrev.addEventListener('click', function(e){ e.stopPropagation(); navigate(-1); });
+            ivNext.addEventListener('click', function(e){ e.stopPropagation(); navigate(1); });
             viewer.addEventListener('click', function(e){ if (e.target === viewer) closeViewer(); });
         }
 
@@ -561,6 +568,7 @@ function andorinha_render_modal_js() {
             var item = e.target.closest('.and-modal-gallery-item');
             if (!item) return;
             e.preventDefault();
+            e.stopPropagation();
             var gallery = item.closest('.and-modal-gallery');
             if (!gallery) return;
             var all  = Array.from(gallery.querySelectorAll('.and-modal-gallery-item'));
