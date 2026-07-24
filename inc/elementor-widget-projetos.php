@@ -233,12 +233,63 @@ function andorinha_projetos_widget_css() {
         content:''; flex:1; height:1px; background:#eee;
     }
     .and-modal-gallery { display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:8px; margin-bottom:24px; }
-    .and-modal-gallery a { display:block; border-radius:6px; overflow:hidden; aspect-ratio:1; }
-    .and-modal-gallery img {
+    .and-modal-gallery-item {
+        display:block; border-radius:6px; overflow:hidden; aspect-ratio:1;
+        cursor:pointer; position:relative;
+    }
+    .and-modal-gallery-item img {
         width:100%; height:100%; object-fit:cover; display:block;
         transition:transform .3s, opacity .3s;
     }
-    .and-modal-gallery a:hover img { transform:scale(1.08); opacity:.9; }
+    .and-modal-gallery-item:hover img { transform:scale(1.08); opacity:.88; }
+    .and-modal-gallery-item::after {
+        content:'\f00e'; font-family:'Font Awesome 6 Free'; font-weight:900;
+        position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+        color:#fff; font-size:20px; background:rgba(0,0,0,.35);
+        opacity:0; transition:opacity .2s;
+    }
+    .and-modal-gallery-item:hover::after { opacity:1; }
+
+    /* Viewer de imagem interno */
+    .and-img-viewer {
+        display:none; position:fixed; inset:0; z-index:999999;
+        background:rgba(0,0,0,.92);
+        align-items:center; justify-content:center;
+        flex-direction:column;
+    }
+    .and-img-viewer.and-iv-open { display:flex; }
+    .and-img-viewer img {
+        max-width:90vw; max-height:82vh;
+        border-radius:8px; object-fit:contain;
+        box-shadow:0 20px 60px rgba(0,0,0,.6);
+        animation:andIvIn .25s ease both;
+    }
+    @keyframes andIvIn {
+        from { opacity:0; transform:scale(.92); }
+        to   { opacity:1; transform:scale(1); }
+    }
+    .and-iv-close {
+        position:absolute; top:18px; right:22px;
+        background:rgba(255,255,255,.15); border:none; color:#fff;
+        width:40px; height:40px; border-radius:50%; font-size:18px;
+        cursor:pointer; display:flex; align-items:center; justify-content:center;
+        transition:background .2s;
+    }
+    .and-iv-close:hover { background:rgba(255,255,255,.28); }
+    .and-iv-nav {
+        position:absolute; top:50%; transform:translateY(-50%);
+        background:rgba(255,255,255,.15); border:none; color:#fff;
+        width:44px; height:44px; border-radius:50%; font-size:18px;
+        cursor:pointer; display:flex; align-items:center; justify-content:center;
+        transition:background .2s;
+    }
+    .and-iv-nav:hover { background:rgba(255,255,255,.28); }
+    .and-iv-prev { left:20px; }
+    .and-iv-next { right:20px; }
+    .and-iv-counter {
+        margin-top:14px; color:rgba(255,255,255,.6);
+        font-size:13px; font-family:'Epilogue',sans-serif;
+    }
 
     /* Footer do modal */
     .and-modal-footer {
@@ -314,6 +365,15 @@ function andorinha_render_modal_html() {
                 </button>
             </div>
         </div>
+    </div>
+
+    <!-- Viewer de imagem interno -->
+    <div class="and-img-viewer" id="andImgViewer">
+        <button class="and-iv-close" id="andIvClose"><i class="fa-solid fa-xmark"></i></button>
+        <button class="and-iv-nav and-iv-prev" id="andIvPrev"><i class="fa-solid fa-chevron-left"></i></button>
+        <img src="" id="andIvImg" alt="" />
+        <button class="and-iv-nav and-iv-next" id="andIvNext"><i class="fa-solid fa-chevron-right"></i></button>
+        <span class="and-iv-counter" id="andIvCounter"></span>
     </div>
     <?php
 }
@@ -409,10 +469,10 @@ function andorinha_render_modal_js() {
             if (data.gallery && data.gallery.length) {
                 var galHtml = '<p class="and-modal-gallery-title"><i class="fa-solid fa-images" style="margin-right:6px;color:#020873;"></i>Galeria de Fotos</p>'
                     + '<div class="and-modal-gallery">';
-                data.gallery.forEach(function(g){
-                    galHtml += '<a href="'+g.full+'" target="_blank">'
+                data.gallery.forEach(function(g, idx){
+                    galHtml += '<div class="and-modal-gallery-item" data-src="'+g.full+'" data-idx="'+idx+'">'
                         + '<img src="'+g.thumb+'" alt="" loading="lazy" />'
-                        + '</a>';
+                        + '</div>';
                 });
                 galHtml += '</div>';
                 galWrap.innerHTML += galHtml;
@@ -447,7 +507,16 @@ function andorinha_render_modal_js() {
         // Fechar ao clicar no overlay ou botão fechar
         overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
         document.getElementById('andModalClose').addEventListener('click', closeModal);
-        document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeModal(); });
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'Escape') {
+                if (viewer.classList.contains('and-iv-open')) closeViewer();
+                else closeModal();
+            }
+            if (viewer.classList.contains('and-iv-open')) {
+                if (e.key === 'ArrowRight') navigate(1);
+                if (e.key === 'ArrowLeft')  navigate(-1);
+            }
+        });
 
         // Delegação: clicar em qualquer botão de abrir modal
         document.addEventListener('click', function(e){
@@ -457,6 +526,50 @@ function andorinha_render_modal_js() {
             var raw = btn.getAttribute('data-projeto');
             if (!raw) return;
             try { openModal(JSON.parse(raw)); } catch(err){ console.error('Modal data error', err); }
+        });
+
+        // ---- IMAGE VIEWER ----
+        var viewer   = document.getElementById('andImgViewer');
+        var ivImg    = document.getElementById('andIvImg');
+        var ivCounter= document.getElementById('andIvCounter');
+        var ivItems  = [];
+        var ivIndex  = 0;
+
+        function openViewer(items, startIdx) {
+            ivItems = items;
+            showIvImage(startIdx);
+            viewer.classList.add('and-iv-open');
+        }
+        function closeViewer() {
+            viewer.classList.remove('and-iv-open');
+            ivImg.src = '';
+        }
+        function showIvImage(idx) {
+            ivIndex = (idx + ivItems.length) % ivItems.length;
+            ivImg.src = '';
+            ivImg.src = ivItems[ivIndex];
+            ivCounter.textContent = (ivIndex + 1) + ' / ' + ivItems.length;
+            document.getElementById('andIvPrev').style.display = ivItems.length > 1 ? '' : 'none';
+            document.getElementById('andIvNext').style.display = ivItems.length > 1 ? '' : 'none';
+        }
+        function navigate(dir) { showIvImage(ivIndex + dir); }
+
+        document.getElementById('andIvClose').addEventListener('click', closeViewer);
+        document.getElementById('andIvPrev').addEventListener('click', function(){ navigate(-1); });
+        document.getElementById('andIvNext').addEventListener('click', function(){ navigate(1); });
+        viewer.addEventListener('click', function(e){ if(e.target === viewer) closeViewer(); });
+
+        // Delegação: clicar em item da galeria
+        document.addEventListener('click', function(e){
+            var item = e.target.closest('.and-modal-gallery-item');
+            if (!item) return;
+            e.preventDefault();
+            var gallery = item.closest('.and-modal-gallery');
+            if (!gallery) return;
+            var all = Array.from(gallery.querySelectorAll('.and-modal-gallery-item'));
+            var srcs = all.map(function(el){ return el.getAttribute('data-src'); });
+            var idx  = all.indexOf(item);
+            openViewer(srcs, idx);
         });
     })();
     </script>
