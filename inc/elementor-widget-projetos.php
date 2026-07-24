@@ -138,6 +138,47 @@ function andorinha_projetos_widget_css() {
     }
     .andorinha-btn-pdf-card:hover { background:#fee2e2; }
 
+    /* ---- Carrossel ---- */
+    .andorinha-carousel-outer { position:relative; display:flex; align-items:center; gap:10px; }
+    .andorinha-carousel-wrap { overflow:hidden; flex:1; min-width:0; }
+    .andorinha-carousel-track { display:flex; transition:transform .45s cubic-bezier(.4,0,.2,1); will-change:transform; }
+    .andorinha-carousel-track .andorinha-col { flex-shrink:0; }
+    .andorinha-carousel-btn {
+        flex-shrink:0; width:46px; height:46px; border-radius:50%;
+        background:#020873; color:#fff; border:none; cursor:pointer;
+        display:flex; align-items:center; justify-content:center;
+        font-size:15px; transition:background .2s, transform .15s;
+        box-shadow:0 4px 14px rgba(2,8,115,.28);
+    }
+    .andorinha-carousel-btn:hover { background:#030a8c; transform:scale(1.08); }
+    .andorinha-carousel-btn:disabled { background:#d0d4e8; box-shadow:none; cursor:default; transform:none; }
+    .andorinha-carousel-dots { display:flex; justify-content:center; gap:7px; margin-top:16px; }
+    .andorinha-carousel-dot {
+        width:8px; height:8px; border-radius:4px; background:#d0d4e8;
+        border:none; cursor:pointer; padding:0;
+        transition:background .25s, width .25s;
+    }
+    .andorinha-carousel-dot.and-dot-active { background:#020873; width:22px; }
+
+    /* ---- Navegação entre projetos na modal ---- */
+    .and-modal-nav {
+        position:absolute; top:50%; transform:translateY(-50%);
+        width:50px; height:50px; border-radius:50%; border:none; cursor:pointer;
+        background:#fff; color:#020873;
+        display:none; align-items:center; justify-content:center;
+        font-size:18px; box-shadow:0 4px 20px rgba(0,0,0,.22);
+        transition:background .2s, box-shadow .2s; z-index:2;
+    }
+    .and-modal-nav.and-nav-show { display:flex; }
+    .and-modal-nav:hover { background:#eef0ff; box-shadow:0 6px 24px rgba(0,0,0,.28); }
+    .and-modal-nav-prev { left:-66px; }
+    .and-modal-nav-next { right:-66px; }
+    @media (max-width:1100px){
+        .and-modal-nav-prev { left:-46px; }
+        .and-modal-nav-next { right:-46px; }
+    }
+    @media (max-width:900px){ .and-modal-nav { display:none !important; } }
+
     /* ============================================================
        MODAL
     ============================================================ */
@@ -347,6 +388,12 @@ function andorinha_render_modal_html() {
     $done = true;
     ?>
     <div class="and-modal-overlay" id="andModalOverlay" role="dialog" aria-modal="true">
+
+        <!-- Navegação entre projetos -->
+        <button class="and-modal-nav and-modal-nav-prev" id="andModalNavPrev" aria-label="Projeto anterior">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+
         <div class="and-modal" id="andModal">
             <button class="and-modal-close" id="andModalClose" aria-label="Fechar">
                 <i class="fa-solid fa-xmark"></i>
@@ -369,6 +416,12 @@ function andorinha_render_modal_html() {
                 </button>
             </div>
         </div>
+
+        <!-- Navegação entre projetos -->
+        <button class="and-modal-nav and-modal-nav-next" id="andModalNavNext" aria-label="Próximo projeto">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
     </div>
 
     <!-- Viewer de imagem interno -->
@@ -405,8 +458,12 @@ function andorinha_render_modal_js() {
         var ivCounter = document.getElementById('andIvCounter');
         var ivPrev    = document.getElementById('andIvPrev');
         var ivNext    = document.getElementById('andIvNext');
+        var navPrev   = document.getElementById('andModalNavPrev');
+        var navNext   = document.getElementById('andModalNavNext');
         var ivItems   = [];
         var ivIndex   = 0;
+        var allProjetos      = [];
+        var currentProjetoIdx = -1;
 
         if (!overlay || !modal) return; // segurança
 
@@ -503,6 +560,7 @@ function andorinha_render_modal_js() {
             overlay.classList.add('and-open');
             document.body.style.overflow = 'hidden';
             modal.querySelector('.and-modal-body').scrollTop = 0;
+            updateModalNav();
         }
 
         function closeModal() {
@@ -527,8 +585,46 @@ function andorinha_render_modal_js() {
             e.preventDefault();
             var raw = btn.getAttribute('data-projeto');
             if (!raw) return;
-            try { openModal(JSON.parse(raw)); } catch(err){ console.error('Modal data error', err); }
+            try {
+                var data = JSON.parse(raw);
+                // Capturar lista de projetos do wrapper pai
+                var wrapper = btn.closest('[data-all-projetos]');
+                if (wrapper) {
+                    try { allProjetos = JSON.parse(wrapper.getAttribute('data-all-projetos')) || []; }
+                    catch(ex) { allProjetos = []; }
+                }
+                // Encontrar índice atual pelo título
+                currentProjetoIdx = allProjetos.findIndex(function(p){ return p.title === data.title; });
+                openModal(data);
+            } catch(err){ console.error('Modal data error', err); }
         });
+
+        /* ================================================================
+           NAVEGAÇÃO ENTRE PROJETOS
+        ================================================================ */
+        function updateModalNav() {
+            var show = allProjetos.length > 1;
+            if (navPrev) navPrev.classList.toggle('and-nav-show', show && currentProjetoIdx > 0);
+            if (navNext) navNext.classList.toggle('and-nav-show', show && currentProjetoIdx < allProjetos.length - 1);
+        }
+        if (navPrev) {
+            navPrev.addEventListener('click', function(e){
+                e.stopPropagation();
+                if (currentProjetoIdx > 0) {
+                    currentProjetoIdx--;
+                    openModal(allProjetos[currentProjetoIdx]);
+                }
+            });
+        }
+        if (navNext) {
+            navNext.addEventListener('click', function(e){
+                e.stopPropagation();
+                if (currentProjetoIdx < allProjetos.length - 1) {
+                    currentProjetoIdx++;
+                    openModal(allProjetos[currentProjetoIdx]);
+                }
+            });
+        }
 
         /* ================================================================
            IMAGE VIEWER
@@ -575,7 +671,7 @@ function andorinha_render_modal_js() {
             openViewer(srcs, all.indexOf(item));
         });
 
-        // Teclado: Esc fecha viewer ou modal; setas navegam viewer
+        // Teclado: Esc fecha viewer ou modal; setas navegam viewer ou projetos
         document.addEventListener('keydown', function(e){
             if (e.key === 'Escape') {
                 if (viewer && viewer.classList.contains('and-iv-open')) closeViewer();
@@ -584,9 +680,86 @@ function andorinha_render_modal_js() {
             if (viewer && viewer.classList.contains('and-iv-open')) {
                 if (e.key === 'ArrowRight') navigate(1);
                 if (e.key === 'ArrowLeft')  navigate(-1);
+            } else if (overlay.classList.contains('and-open')) {
+                if (e.key === 'ArrowRight' && navNext && navNext.classList.contains('and-nav-show')) navNext.click();
+                if (e.key === 'ArrowLeft'  && navPrev && navPrev.classList.contains('and-nav-show')) navPrev.click();
             }
         });
 
+    })();
+    </script>
+    <?php
+}
+
+
+
+// =============================================
+// JS DO CARROSSEL (inline, escopo isolado)
+// =============================================
+function andorinha_render_carousel_js() {
+    static $done = false;
+    if ( $done ) return;
+    $done = true;
+    ?>
+    <script>
+    (function(){
+        function initCarousel(wrapper) {
+            var track   = wrapper.querySelector('.andorinha-carousel-track');
+            var items   = wrapper.querySelectorAll('.andorinha-carousel-item');
+            var prevBtn = wrapper.querySelector('.andorinha-carousel-prev');
+            var nextBtn = wrapper.querySelector('.andorinha-carousel-next');
+            var dotsWrap= wrapper.querySelector('.andorinha-carousel-dots');
+            var visible = parseInt(wrapper.getAttribute('data-visible')) || 3;
+            var total   = items.length;
+            var maxIdx  = Math.max(0, total - visible);
+            var cur     = 0;
+
+            if (!track || total === 0) return;
+
+            // Definir largura de cada item via JS
+            Array.from(items).forEach(function(item){
+                item.style.width = 'calc(100% / ' + visible + ')';
+            });
+
+            // Criar dots
+            var dots = [];
+            if (dotsWrap) {
+                for (var i = 0; i <= maxIdx; i++) {
+                    var dot = document.createElement('button');
+                    dot.className = 'andorinha-carousel-dot';
+                    dot.setAttribute('aria-label', 'Ir para ' + (i+1));
+                    (function(idx){ dot.addEventListener('click', function(){ goTo(idx); }); })(i);
+                    dotsWrap.appendChild(dot);
+                    dots.push(dot);
+                }
+            }
+
+            function goTo(idx) {
+                cur = Math.max(0, Math.min(idx, maxIdx));
+                track.style.transform = 'translateX(-' + (cur * (100 / visible)) + '%)';
+                if (prevBtn) prevBtn.disabled = cur === 0;
+                if (nextBtn) nextBtn.disabled = cur >= maxIdx;
+                dots.forEach(function(d, i){
+                    d.classList.toggle('and-dot-active', i === cur);
+                });
+            }
+
+            if (prevBtn) prevBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(cur - 1); });
+            if (nextBtn) nextBtn.addEventListener('click', function(e){ e.stopPropagation(); goTo(cur + 1); });
+
+            // Touch/drag support
+            var touchStartX = 0;
+            track.addEventListener('touchstart', function(e){ touchStartX = e.touches[0].clientX; }, {passive:true});
+            track.addEventListener('touchend',   function(e){
+                var diff = touchStartX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) goTo(diff > 0 ? cur + 1 : cur - 1);
+            });
+
+            goTo(0);
+        }
+
+        // Inicializar todos os carrosseis da página
+        document.querySelectorAll('[data-layout="carousel"]').forEach(initCarousel);
     })();
     </script>
     <?php
@@ -751,9 +924,9 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
 }
 
 // =============================================
-// 6. FUNÇÃO PRINCIPAL DA GRADE
+// 6. FUNÇÃO PRINCIPAL DA GRADE / CARROSSEL
 // =============================================
-function andorinha_render_projetos_grid( $posts_per_page = 6, $columns = 3, $tipo_filtro = 'todos' ) {
+function andorinha_render_projetos_grid( $posts_per_page = 6, $columns = 3, $tipo_filtro = 'todos', $layout_type = 'grid' ) {
     $query_args = array(
         'post_type'      => 'projetos',
         'posts_per_page' => intval( $posts_per_page ),
@@ -778,20 +951,64 @@ function andorinha_render_projetos_grid( $posts_per_page = 6, $columns = 3, $tip
     }
 
     $col_class = 'andorinha-col andorinha-col-' . intval( $columns );
+    $is_carousel = ( $layout_type === 'carousel' );
+
+    // Coletar dados de todos os projetos para navegação na modal
+    $all_modal_data = array();
+    $cards_html     = array();
+    while ( $query->have_posts() ) {
+        $query->the_post();
+        $pid = get_the_ID();
+        $card_html = andorinha_render_projeto_card( $pid, $col_class );
+
+        // Extrair modal_data do data-projeto do card para o índice global
+        if ( preg_match( '/data-projeto="([^"]+)"/', $card_html, $m ) ) {
+            $decoded = html_entity_decode( $m[1], ENT_QUOTES );
+            $data    = json_decode( $decoded, true );
+            if ( $data ) $all_modal_data[] = $data;
+        }
+        $cards_html[] = $card_html;
+    }
+    wp_reset_postdata();
+
+    $all_projetos_json = esc_attr( wp_json_encode( $all_modal_data ) );
+    $uid = 'andorinha_carousel_' . uniqid();
 
     ob_start();
     andorinha_projetos_widget_css();
     andorinha_render_modal_html();
 
-    echo '<div class="andorinha-projetos-widget-wrapper"><div class="andorinha-projetos-grid">';
-    while ( $query->have_posts() ) {
-        $query->the_post();
-        echo andorinha_render_projeto_card( get_the_ID(), $col_class );
+    if ( $is_carousel ) {
+        $visible = intval( $columns ); // colunas = itens visíveis
+        echo '<div class="andorinha-projetos-widget-wrapper" data-all-projetos="' . $all_projetos_json . '" data-layout="carousel" data-visible="' . $visible . '" id="' . esc_attr( $uid ) . '">';
+        echo '<div class="andorinha-carousel-outer">';
+        echo '<button class="andorinha-carousel-btn andorinha-carousel-prev" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>';
+        echo '<div class="andorinha-carousel-wrap">';
+        echo '<div class="andorinha-carousel-track">';
+        foreach ( $cards_html as $ch ) {
+            // Ajustar largura do card para o carrossel
+            echo str_replace(
+                'class="andorinha-col ',
+                'class="andorinha-carousel-item andorinha-col ',
+                $ch
+            );
+        }
+        echo '</div>'; // track
+        echo '</div>'; // wrap
+        echo '<button class="andorinha-carousel-btn andorinha-carousel-next" aria-label="Próximo"><i class="fa-solid fa-chevron-right"></i></button>';
+        echo '</div>'; // outer
+        echo '<div class="andorinha-carousel-dots"></div>';
+        echo '</div>'; // wrapper
+    } else {
+        echo '<div class="andorinha-projetos-widget-wrapper" data-all-projetos="' . $all_projetos_json . '">';
+        echo '<div class="andorinha-projetos-grid">';
+        foreach ( $cards_html as $ch ) echo $ch;
+        echo '</div>';
+        echo '</div>';
     }
-    echo '</div></div>';
-    wp_reset_postdata();
 
     andorinha_render_modal_js();
+    if ( $is_carousel ) andorinha_render_carousel_js();
     return ob_get_clean();
 }
 
@@ -837,6 +1054,15 @@ add_action( 'elementor/init', function() {
                     'label' => __( 'Configurações', 'andorinha-starter' ),
                     'tab'   => \Elementor\Controls_Manager::TAB_CONTENT,
                 ) );
+                $this->add_control( 'layout_type', array(
+                    'label'   => __( 'Layout', 'andorinha-starter' ),
+                    'type'    => \Elementor\Controls_Manager::SELECT,
+                    'default' => 'grid',
+                    'options' => array(
+                        'grid'     => __( 'Grade', 'andorinha-starter' ),
+                        'carousel' => __( 'Carrossel', 'andorinha-starter' ),
+                    ),
+                ) );
                 $this->add_control( 'tipo_filtro', array(
                     'label'   => __( 'Exibir', 'andorinha-starter' ),
                     'type'    => \Elementor\Controls_Manager::SELECT,
@@ -853,10 +1079,10 @@ add_action( 'elementor/init', function() {
                     'min' => 1, 'max' => 24, 'step' => 1, 'default' => 6,
                 ) );
                 $this->add_control( 'columns', array(
-                    'label'   => __( 'Colunas', 'andorinha-starter' ),
+                    'label'   => __( 'Colunas / Visíveis no carrossel', 'andorinha-starter' ),
                     'type'    => \Elementor\Controls_Manager::SELECT,
                     'default' => '3',
-                    'options' => array( '2' => '2 Colunas', '3' => '3 Colunas', '4' => '4 Colunas' ),
+                    'options' => array( '1' => '1', '2' => '2', '3' => '3', '4' => '4' ),
                 ) );
                 $this->end_controls_section();
             }
@@ -866,7 +1092,8 @@ add_action( 'elementor/init', function() {
                 echo andorinha_render_projetos_grid(
                     $s['posts_per_page'] ?? 6,
                     $s['columns']        ?? 3,
-                    $s['tipo_filtro']    ?? 'todos'
+                    $s['tipo_filtro']    ?? 'todos',
+                    $s['layout_type']    ?? 'grid'
                 );
             }
         }
