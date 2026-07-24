@@ -205,6 +205,8 @@ function andorinha_projetos_widget_css() {
         font-size:.97rem; color:#444; line-height:1.75;
         margin:0 0 22px; border-bottom:1px solid #f0f0f0; padding-bottom:20px;
     }
+    .and-modal-desc:empty,
+    .and-modal-desc[style*="display:none"] { margin:0; padding:0; border:none; }
 
     /* Fields grid */
     .and-modal-fields { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:24px; }
@@ -300,7 +302,7 @@ function andorinha_render_modal_html() {
 
             <!-- Corpo -->
             <div class="and-modal-body" id="andModalBody">
-                <p class="and-modal-desc" id="andModalDesc"></p>
+                <p class="and-modal-desc" id="andModalDesc" style="display:none;"></p>
                 <div class="and-modal-fields" id="andModalFields"></div>
                 <div id="andModalGalleryWrap"></div>
             </div>
@@ -360,11 +362,12 @@ function andorinha_render_modal_js() {
             }
 
             // ---- DESCRIÇÃO ----
-            if (data.desc) {
+            if (data.desc && data.desc.trim()) {
                 desc.style.display = '';
-                desc.textContent = data.desc;
+                desc.textContent = data.desc.trim();
             } else {
                 desc.style.display = 'none';
+                desc.textContent = '';
             }
 
             // ---- CAMPOS ----
@@ -385,6 +388,7 @@ function andorinha_render_modal_js() {
                 }
             });
             fields.innerHTML = fieldsHtml;
+            fields.style.display = fieldsHtml ? '' : 'none';
 
             // ---- VÍDEO ----
             galWrap.innerHTML = '';
