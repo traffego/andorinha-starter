@@ -388,17 +388,29 @@ function andorinha_render_modal_js() {
     ?>
     <script>
     (function(){
-        var overlay  = document.getElementById('andModalOverlay');
-        var modal    = document.getElementById('andModal');
-        var hero     = document.getElementById('andModalHero');
-        var body     = document.getElementById('andModalBody');
-        var desc     = document.getElementById('andModalDesc');
-        var fields   = document.getElementById('andModalFields');
-        var galWrap  = document.getElementById('andModalGalleryWrap');
-        var footer   = document.getElementById('andModalFooter');
+        /* ---- ELEMENTOS ---- */
+        var overlay   = document.getElementById('andModalOverlay');
+        var modal     = document.getElementById('andModal');
+        var hero      = document.getElementById('andModalHero');
+        var desc      = document.getElementById('andModalDesc');
+        var fields    = document.getElementById('andModalFields');
+        var galWrap   = document.getElementById('andModalGalleryWrap');
+        var footer    = document.getElementById('andModalFooter');
+        var viewer    = document.getElementById('andImgViewer');
+        var ivImg     = document.getElementById('andIvImg');
+        var ivCounter = document.getElementById('andIvCounter');
+        var ivPrev    = document.getElementById('andIvPrev');
+        var ivNext    = document.getElementById('andIvNext');
+        var ivItems   = [];
+        var ivIndex   = 0;
 
+        if (!overlay || !modal) return; // segurança
+
+        /* ================================================================
+           MODAL
+        ================================================================ */
         function openModal(data) {
-            // ---- HERO ----
+            // HERO
             var heroContent = '<div class="and-modal-hero-overlay"></div>';
             if (data.img) {
                 hero.innerHTML = '<img src="'+data.img+'" alt="'+esc(data.title)+'" />'
@@ -421,22 +433,22 @@ function andorinha_render_modal_js() {
                     + '</div></div>';
             }
 
-            // ---- DESCRIÇÃO ----
+            // DESCRIÇÃO
             if (data.desc && data.desc.trim()) {
-                desc.style.display = '';
                 desc.textContent = data.desc.trim();
+                desc.style.display = '';
             } else {
-                desc.style.display = 'none';
                 desc.textContent = '';
+                desc.style.display = 'none';
             }
 
-            // ---- CAMPOS ----
+            // CAMPOS
             var fieldDefs = [
-                { icon:'fa-solid fa-calendar-days',    label:'Data',            key:'data_label' },
-                { icon:'fa-solid fa-file-contract',   label:'Termo de Fomento', key:'termo' },
-                { icon:'fa-solid fa-barcode',          label:'Cód. Objeto',     key:'objeto' },
-                { icon:'fa-solid fa-hashtag',          label:'Cód. Programa',   key:'programa' },
-                { icon:'fa-solid fa-building-columns', label:'Programa',         key:'nome_programa' }
+                { icon:'fa-solid fa-calendar-days',    label:'Data',             key:'data_label' },
+                { icon:'fa-solid fa-file-contract',    label:'Termo de Fomento', key:'termo' },
+                { icon:'fa-solid fa-barcode',          label:'Cód. Objeto',      key:'objeto' },
+                { icon:'fa-solid fa-hashtag',          label:'Cód. Programa',    key:'programa' },
+                { icon:'fa-solid fa-building-columns', label:'Programa',          key:'nome_programa' }
             ];
             var fieldsHtml = '';
             fieldDefs.forEach(function(f){
@@ -450,22 +462,18 @@ function andorinha_render_modal_js() {
             fields.innerHTML = fieldsHtml;
             fields.style.display = fieldsHtml ? '' : 'none';
 
-            // ---- VÍDEO ----
+            // VÍDEO + GALERIA
             galWrap.innerHTML = '';
             if (data.video) {
                 var videoHtml = '<div class="and-modal-video-wrap">'
                     + '<p class="and-modal-video-title"><i class="fa-solid fa-circle-play" style="margin-right:6px;color:#020873;"></i>Vídeo</p>'
                     + '<div class="and-modal-video-responsive">';
-                if (data.video_is_file) {
-                    videoHtml += '<video src="' + data.video + '" controls></video>';
-                } else {
-                    videoHtml += '<iframe src="' + data.video + '" allowfullscreen allow="autoplay; encrypted-media"></iframe>';
-                }
+                videoHtml += data.video_is_file
+                    ? '<video src="'+data.video+'" controls></video>'
+                    : '<iframe src="'+data.video+'" allowfullscreen allow="autoplay; encrypted-media"></iframe>';
                 videoHtml += '</div></div>';
-                galWrap.innerHTML += videoHtml;
+                galWrap.innerHTML = videoHtml;
             }
-
-            // ---- GALERIA ----
             if (data.gallery && data.gallery.length) {
                 var galHtml = '<p class="and-modal-gallery-title"><i class="fa-solid fa-images" style="margin-right:6px;color:#020873;"></i>Galeria de Fotos</p>'
                     + '<div class="and-modal-gallery">';
@@ -478,7 +486,7 @@ function andorinha_render_modal_js() {
                 galWrap.innerHTML += galHtml;
             }
 
-            // ---- FOOTER ----
+            // FOOTER
             var footerHtml = '<button class="and-modal-btn-close" id="andModalBtnClose"><i class="fa-solid fa-xmark"></i> Fechar</button>';
             if (data.pdf) {
                 footerHtml = '<a href="'+data.pdf+'" target="_blank" class="and-modal-btn-pdf">'
@@ -500,25 +508,15 @@ function andorinha_render_modal_js() {
 
         function esc(str) {
             var d = document.createElement('div');
-            d.appendChild(document.createTextNode(str||''));
+            d.appendChild(document.createTextNode(str || ''));
             return d.innerHTML;
         }
 
-        // Fechar ao clicar no overlay ou botão fechar
-        overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+        // Eventos da modal
+        overlay.addEventListener('click', function(e){ if (e.target === overlay) closeModal(); });
         document.getElementById('andModalClose').addEventListener('click', closeModal);
-        document.addEventListener('keydown', function(e){
-            if (e.key === 'Escape') {
-                if (viewer.classList.contains('and-iv-open')) closeViewer();
-                else closeModal();
-            }
-            if (viewer.classList.contains('and-iv-open')) {
-                if (e.key === 'ArrowRight') navigate(1);
-                if (e.key === 'ArrowLeft')  navigate(-1);
-            }
-        });
 
-        // Delegação: clicar em qualquer botão de abrir modal
+        // Abrir modal ao clicar no botão
         document.addEventListener('click', function(e){
             var btn = e.target.closest('.andorinha-btn-modal');
             if (!btn) return;
@@ -528,53 +526,66 @@ function andorinha_render_modal_js() {
             try { openModal(JSON.parse(raw)); } catch(err){ console.error('Modal data error', err); }
         });
 
-        // ---- IMAGE VIEWER ----
-        var viewer   = document.getElementById('andImgViewer');
-        var ivImg    = document.getElementById('andIvImg');
-        var ivCounter= document.getElementById('andIvCounter');
-        var ivItems  = [];
-        var ivIndex  = 0;
-
+        /* ================================================================
+           IMAGE VIEWER
+        ================================================================ */
         function openViewer(items, startIdx) {
+            if (!viewer) return;
             ivItems = items;
             showIvImage(startIdx);
             viewer.classList.add('and-iv-open');
         }
         function closeViewer() {
+            if (!viewer) return;
             viewer.classList.remove('and-iv-open');
             ivImg.src = '';
         }
         function showIvImage(idx) {
             ivIndex = (idx + ivItems.length) % ivItems.length;
-            ivImg.src = '';
             ivImg.src = ivItems[ivIndex];
             ivCounter.textContent = (ivIndex + 1) + ' / ' + ivItems.length;
-            document.getElementById('andIvPrev').style.display = ivItems.length > 1 ? '' : 'none';
-            document.getElementById('andIvNext').style.display = ivItems.length > 1 ? '' : 'none';
+            if (ivPrev) ivPrev.style.display = ivItems.length > 1 ? '' : 'none';
+            if (ivNext) ivNext.style.display = ivItems.length > 1 ? '' : 'none';
         }
         function navigate(dir) { showIvImage(ivIndex + dir); }
 
-        document.getElementById('andIvClose').addEventListener('click', closeViewer);
-        document.getElementById('andIvPrev').addEventListener('click', function(){ navigate(-1); });
-        document.getElementById('andIvNext').addEventListener('click', function(){ navigate(1); });
-        viewer.addEventListener('click', function(e){ if(e.target === viewer) closeViewer(); });
+        if (viewer) {
+            document.getElementById('andIvClose').addEventListener('click', closeViewer);
+            ivPrev.addEventListener('click', function(){ navigate(-1); });
+            ivNext.addEventListener('click', function(){ navigate(1); });
+            viewer.addEventListener('click', function(e){ if (e.target === viewer) closeViewer(); });
+        }
 
-        // Delegação: clicar em item da galeria
+        // Clicar em thumbnail da galeria
         document.addEventListener('click', function(e){
             var item = e.target.closest('.and-modal-gallery-item');
             if (!item) return;
             e.preventDefault();
             var gallery = item.closest('.and-modal-gallery');
             if (!gallery) return;
-            var all = Array.from(gallery.querySelectorAll('.and-modal-gallery-item'));
+            var all  = Array.from(gallery.querySelectorAll('.and-modal-gallery-item'));
             var srcs = all.map(function(el){ return el.getAttribute('data-src'); });
-            var idx  = all.indexOf(item);
-            openViewer(srcs, idx);
+            openViewer(srcs, all.indexOf(item));
         });
+
+        // Teclado: Esc fecha viewer ou modal; setas navegam viewer
+        document.addEventListener('keydown', function(e){
+            if (e.key === 'Escape') {
+                if (viewer && viewer.classList.contains('and-iv-open')) closeViewer();
+                else closeModal();
+            }
+            if (viewer && viewer.classList.contains('and-iv-open')) {
+                if (e.key === 'ArrowRight') navigate(1);
+                if (e.key === 'ArrowLeft')  navigate(-1);
+            }
+        });
+
     })();
     </script>
     <?php
-}
+
+
+
 
 // =============================================
 // 5. RENDERIZAR CARD
