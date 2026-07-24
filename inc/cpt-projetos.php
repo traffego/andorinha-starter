@@ -199,14 +199,45 @@ function andorinha_render_midia_metabox( $post ) {
         .andorinha-galeria-item { position: relative; width: 100px; height: 100px; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; background: #f0f0f0; }
         .andorinha-galeria-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .andorinha-galeria-item .remove-img { position: absolute; top: 3px; right: 3px; background: rgba(220,0,0,.85); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 14px; line-height: 20px; text-align: center; }
-        .andorinha-video-tabs { display: flex; gap: 0; margin-bottom: 12px; border-bottom: 2px solid #ddd; }
-        .andorinha-video-tab { padding: 8px 18px; cursor: pointer; font-size: 13px; font-weight: 600; color: #666; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; }
-        .andorinha-video-tab.active { color: #0073aa; border-bottom-color: #0073aa; }
-        .andorinha-video-panel { display: none; }
-        .andorinha-video-panel.active { display: block; }
+
+        /* Tabs de vídeo — seletores reforçados para sobrepor estilos do WP admin */
+        #andorinha_projeto_midia .andorinha-video-tabs {
+            display: flex !important;
+            margin-bottom: 14px !important;
+            border-bottom: 2px solid #ddd !important;
+            gap: 0 !important;
+        }
+        #andorinha_projeto_midia .andorinha-video-tab {
+            display: inline-block !important;
+            padding: 9px 20px !important;
+            cursor: pointer !important;
+            font-size: 13px !important;
+            font-weight: 600 !important;
+            color: #555 !important;
+            background: transparent !important;
+            border: none !important;
+            border-bottom: 3px solid transparent !important;
+            margin-bottom: -2px !important;
+            border-radius: 0 !important;
+            box-shadow: none !important;
+            outline: none !important;
+            transition: color .15s, border-color .15s !important;
+        }
+        #andorinha_projeto_midia .andorinha-video-tab:hover {
+            color: #0073aa !important;
+            background: transparent !important;
+        }
+        #andorinha_projeto_midia .andorinha-video-tab.and-tab-active {
+            color: #0073aa !important;
+            border-bottom-color: #0073aa !important;
+            background: transparent !important;
+        }
+        #andorinha_projeto_midia .andorinha-video-panel { display: none; }
+        #andorinha_projeto_midia .andorinha-video-panel.and-panel-active { display: block; }
         .andorinha-video-preview { margin-top: 10px; }
         .andorinha-video-preview video { max-width: 100%; border-radius: 6px; }
     </style>
+
 
     <!-- PDF -->
     <div class="andorinha-midia-field">
@@ -228,12 +259,12 @@ function andorinha_render_midia_metabox( $post ) {
         <label>Vídeo do Projeto: <em style="font-weight:400;color:#888;">(opcional)</em></label>
 
         <div class="andorinha-video-tabs">
-            <button type="button" class="andorinha-video-tab <?php echo empty( $video_file ) ? 'active' : ''; ?>" data-panel="url">YouTube / Vimeo / URL</button>
-            <button type="button" class="andorinha-video-tab <?php echo ! empty( $video_file ) ? 'active' : ''; ?>" data-panel="arquivo">Arquivo de Vídeo (mp4)</button>
+            <button type="button" class="andorinha-video-tab <?php echo empty( $video_file ) ? 'and-tab-active' : ''; ?>" data-panel="url">YouTube / Vimeo / URL</button>
+            <button type="button" class="andorinha-video-tab <?php echo ! empty( $video_file ) ? 'and-tab-active' : ''; ?>" data-panel="arquivo">Arquivo de Vídeo (mp4)</button>
         </div>
 
         <!-- Painel URL -->
-        <div class="andorinha-video-panel <?php echo empty( $video_file ) ? 'active' : ''; ?>" id="andorinha_video_panel_url">
+        <div class="andorinha-video-panel <?php echo empty( $video_file ) ? 'and-panel-active' : ''; ?>" id="andorinha_video_panel_url">
             <input type="url" id="andorinha_video_url" name="andorinha_video_url"
                    value="<?php echo esc_url( $video_url ); ?>"
                    class="widefat" placeholder="Ex: https://www.youtube.com/watch?v=..." />
@@ -241,7 +272,7 @@ function andorinha_render_midia_metabox( $post ) {
         </div>
 
         <!-- Painel Arquivo -->
-        <div class="andorinha-video-panel <?php echo ! empty( $video_file ) ? 'active' : ''; ?>" id="andorinha_video_panel_arquivo">
+        <div class="andorinha-video-panel <?php echo ! empty( $video_file ) ? 'and-panel-active' : ''; ?>" id="andorinha_video_panel_arquivo">
             <input type="text" id="andorinha_video_arquivo" name="andorinha_video_arquivo"
                    value="<?php echo esc_url( $video_file ); ?>"
                    class="widefat" style="max-width: calc(100% - 175px);" readonly />
@@ -254,6 +285,7 @@ function andorinha_render_midia_metabox( $post ) {
                 <?php endif; ?>
             </div>
         </div>
+
     </div>
 
     <hr style="margin: 20px 0;">

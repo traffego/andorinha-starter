@@ -20,12 +20,15 @@ jQuery(document).ready(function($) {
     /* =============================================
        TABS DE VÍDEO
     ============================================= */
-    $(document).on('click', '.andorinha-video-tab', function() {
+    $(document).on('click', '.andorinha-video-tab', function(e) {
+        e.preventDefault();
         var panel = $(this).data('panel');
-        $('.andorinha-video-tab').removeClass('active');
-        $(this).addClass('active');
-        $('.andorinha-video-panel').removeClass('active');
-        $('#andorinha_video_panel_' + panel).addClass('active');
+        // Tabs
+        $('.andorinha-video-tab').removeClass('and-tab-active');
+        $(this).addClass('and-tab-active');
+        // Painéis
+        $('.andorinha-video-panel').removeClass('and-panel-active');
+        $('#andorinha_video_panel_' + panel).addClass('and-panel-active');
     });
 
 
