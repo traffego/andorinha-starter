@@ -186,8 +186,10 @@ function andorinha_render_tipo_metabox( $post ) {
 // 5. RENDERIZAR META BOX: ARQUIVOS E MÍDIA
 // =============================================
 function andorinha_render_midia_metabox( $post ) {
-    $pdf_url     = get_post_meta( $post->ID, '_andorinha_projeto_pdf',    true );
-    $galeria_ids = get_post_meta( $post->ID, '_andorinha_projeto_galeria', true );
+    $pdf_url      = get_post_meta( $post->ID, '_andorinha_projeto_pdf',      true );
+    $galeria_ids  = get_post_meta( $post->ID, '_andorinha_projeto_galeria',  true );
+    $video_url    = get_post_meta( $post->ID, '_andorinha_video_url',        true );
+    $video_file   = get_post_meta( $post->ID, '_andorinha_video_arquivo',    true );
     ?>
     <style>
         .andorinha-midia-field { margin-bottom: 20px; }
@@ -197,6 +199,13 @@ function andorinha_render_midia_metabox( $post ) {
         .andorinha-galeria-item { position: relative; width: 100px; height: 100px; border: 1px solid #ccc; border-radius: 6px; overflow: hidden; background: #f0f0f0; }
         .andorinha-galeria-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
         .andorinha-galeria-item .remove-img { position: absolute; top: 3px; right: 3px; background: rgba(220,0,0,.85); color: white; border: none; border-radius: 50%; width: 22px; height: 22px; cursor: pointer; font-size: 14px; line-height: 20px; text-align: center; }
+        .andorinha-video-tabs { display: flex; gap: 0; margin-bottom: 12px; border-bottom: 2px solid #ddd; }
+        .andorinha-video-tab { padding: 8px 18px; cursor: pointer; font-size: 13px; font-weight: 600; color: #666; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .2s; }
+        .andorinha-video-tab.active { color: #0073aa; border-bottom-color: #0073aa; }
+        .andorinha-video-panel { display: none; }
+        .andorinha-video-panel.active { display: block; }
+        .andorinha-video-preview { margin-top: 10px; }
+        .andorinha-video-preview video { max-width: 100%; border-radius: 6px; }
     </style>
 
     <!-- PDF -->
@@ -207,8 +216,43 @@ function andorinha_render_midia_metabox( $post ) {
         <button type="button" class="button button-link-delete" id="andorinha_remove_pdf_btn" style="<?php echo empty( $pdf_url ) ? 'display:none;' : ''; ?>">Remover</button>
         <div class="andorinha-preview-pdf" id="andorinha_pdf_preview">
             <?php if ( $pdf_url ) : ?>
-                <a href="<?php echo esc_url( $pdf_url ); ?>" target="_blank">📄 <?php echo esc_html( basename( $pdf_url ) ); ?></a>
+                <a href="<?php echo esc_url( $pdf_url ); ?>" target="_blank">PDF: <?php echo esc_html( basename( $pdf_url ) ); ?></a>
             <?php endif; ?>
+        </div>
+    </div>
+
+    <hr style="margin: 20px 0;">
+
+    <!-- Vídeo -->
+    <div class="andorinha-midia-field">
+        <label>Vídeo do Projeto: <em style="font-weight:400;color:#888;">(opcional)</em></label>
+
+        <div class="andorinha-video-tabs">
+            <button type="button" class="andorinha-video-tab <?php echo empty( $video_file ) ? 'active' : ''; ?>" data-panel="url">YouTube / Vimeo / URL</button>
+            <button type="button" class="andorinha-video-tab <?php echo ! empty( $video_file ) ? 'active' : ''; ?>" data-panel="arquivo">Arquivo de Vídeo (mp4)</button>
+        </div>
+
+        <!-- Painel URL -->
+        <div class="andorinha-video-panel <?php echo empty( $video_file ) ? 'active' : ''; ?>" id="andorinha_video_panel_url">
+            <input type="url" id="andorinha_video_url" name="andorinha_video_url"
+                   value="<?php echo esc_url( $video_url ); ?>"
+                   class="widefat" placeholder="Ex: https://www.youtube.com/watch?v=..." />
+            <p style="color:#888;font-size:12px;margin-top:5px;">Suporta YouTube, Vimeo ou qualquer URL de vídeo.</p>
+        </div>
+
+        <!-- Painel Arquivo -->
+        <div class="andorinha-video-panel <?php echo ! empty( $video_file ) ? 'active' : ''; ?>" id="andorinha_video_panel_arquivo">
+            <input type="text" id="andorinha_video_arquivo" name="andorinha_video_arquivo"
+                   value="<?php echo esc_url( $video_file ); ?>"
+                   class="widefat" style="max-width: calc(100% - 175px);" readonly />
+            <button type="button" class="button button-secondary" id="andorinha_upload_video_btn">Selecionar Vídeo</button>
+            <button type="button" class="button button-link-delete" id="andorinha_remove_video_btn"
+                    style="<?php echo empty( $video_file ) ? 'display:none;' : ''; ?>">Remover</button>
+            <div class="andorinha-video-preview" id="andorinha_video_preview">
+                <?php if ( $video_file ) : ?>
+                    <video src="<?php echo esc_url( $video_file ); ?>" controls style="max-height:160px;"></video>
+                <?php endif; ?>
+            </div>
         </div>
     </div>
 
@@ -256,12 +300,11 @@ function andorinha_save_projeto_meta( $post_id ) {
     }
 
     $text_fields = array(
-        'andorinha_tipo'          => '_andorinha_tipo',
-        'andorinha_descricao'     => '_andorinha_descricao',
-        'andorinha_termo_fomento' => '_andorinha_termo_fomento',
-        'andorinha_cod_objeto'    => '_andorinha_cod_objeto',
-        'andorinha_cod_programa'  => '_andorinha_cod_programa',
-        'andorinha_nome_programa' => '_andorinha_nome_programa',
+        'andorinha_tipo'            => '_andorinha_tipo',
+        'andorinha_termo_fomento'   => '_andorinha_termo_fomento',
+        'andorinha_cod_objeto'      => '_andorinha_cod_objeto',
+        'andorinha_cod_programa'    => '_andorinha_cod_programa',
+        'andorinha_nome_programa'   => '_andorinha_nome_programa',
         'andorinha_projeto_galeria' => '_andorinha_projeto_galeria',
     );
 
@@ -271,13 +314,21 @@ function andorinha_save_projeto_meta( $post_id ) {
         }
     }
 
-    // Descrição permite mais caracteres
+    // Descrição (textarea)
     if ( isset( $_POST['andorinha_descricao'] ) ) {
         update_post_meta( $post_id, '_andorinha_descricao', sanitize_textarea_field( $_POST['andorinha_descricao'] ) );
     }
 
-    if ( isset( $_POST['andorinha_projeto_pdf'] ) ) {
-        update_post_meta( $post_id, '_andorinha_projeto_pdf', esc_url_raw( $_POST['andorinha_projeto_pdf'] ) );
+    // URLs
+    $url_fields = array(
+        'andorinha_projeto_pdf'   => '_andorinha_projeto_pdf',
+        'andorinha_video_url'     => '_andorinha_video_url',
+        'andorinha_video_arquivo' => '_andorinha_video_arquivo',
+    );
+    foreach ( $url_fields as $post_key => $meta_key ) {
+        if ( isset( $_POST[ $post_key ] ) ) {
+            update_post_meta( $post_id, $meta_key, esc_url_raw( $_POST[ $post_key ] ) );
+        }
     }
 }
 add_action( 'save_post_projetos', 'andorinha_save_projeto_meta' );

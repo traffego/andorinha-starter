@@ -29,6 +29,24 @@ function andorinha_get_projeto_image( $post_id, $size = 'medium_large' ) {
 }
 
 // =============================================
+// 1b. HELPER: converter URL de vídeo em embed
+// =============================================
+function andorinha_get_video_embed( $url ) {
+    if ( empty( $url ) ) return '';
+
+    // YouTube
+    if ( preg_match( '/(?:youtube\.com\/(?:watch\?v=|embed\/)|youtu\.be\/)([\w-]{11})/', $url, $m ) ) {
+        return 'https://www.youtube.com/embed/' . $m[1] . '?rel=0&controls=1';
+    }
+    // Vimeo
+    if ( preg_match( '/vimeo\.com\/(\d+)/', $url, $m ) ) {
+        return 'https://player.vimeo.com/video/' . $m[1];
+    }
+    // Arquivo direto
+    return $url;
+}
+
+// =============================================
 // 2. CSS: GRID + CARDS + MODAL
 // =============================================
 function andorinha_projetos_widget_css() {
@@ -243,10 +261,21 @@ function andorinha_projetos_widget_css() {
     }
     .and-modal-btn-close:hover { background:#e0e0e0; }
 
-    /* Sem imagem hero */
-    .and-modal-hero-no-img {
-        height:160px; display:flex; align-items:center; justify-content:center;
-        font-size:60px; color:rgba(255,255,255,.5);
+    /* Vídeo na modal */
+    .and-modal-video-wrap { margin-bottom:24px; }
+    .and-modal-video-title {
+        font-size:.78rem; font-weight:700; text-transform:uppercase;
+        letter-spacing:.6px; color:#888; margin:0 0 12px;
+        display:flex; align-items:center; gap:7px;
+    }
+    .and-modal-video-title::after { content:''; flex:1; height:1px; background:#eee; }
+    .and-modal-video-responsive {
+        position:relative; padding-bottom:56.25%; height:0; overflow:hidden;
+        border-radius:10px; background:#000;
+    }
+    .and-modal-video-responsive iframe,
+    .and-modal-video-responsive video {
+        position:absolute; top:0; left:0; width:100%; height:100%; border:none; border-radius:10px;
     }
     </style>
     <?php
@@ -356,8 +385,22 @@ function andorinha_render_modal_js() {
             });
             fields.innerHTML = fieldsHtml;
 
-            // ---- GALERIA ----
+            // ---- VÍDEO ----
             galWrap.innerHTML = '';
+            if (data.video) {
+                var videoHtml = '<div class="and-modal-video-wrap">'
+                    + '<p class="and-modal-video-title"><i class="fa-solid fa-circle-play" style="margin-right:6px;color:#020873;"></i>Vídeo</p>'
+                    + '<div class="and-modal-video-responsive">';
+                if (data.video_is_file) {
+                    videoHtml += '<video src="' + data.video + '" controls></video>';
+                } else {
+                    videoHtml += '<iframe src="' + data.video + '" allowfullscreen allow="autoplay; encrypted-media"></iframe>';
+                }
+                videoHtml += '</div></div>';
+                galWrap.innerHTML += videoHtml;
+            }
+
+            // ---- GALERIA ----
             if (data.gallery && data.gallery.length) {
                 var galHtml = '<p class="and-modal-gallery-title"><i class="fa-solid fa-images" style="margin-right:6px;color:#020873;"></i>Galeria de Fotos</p>'
                     + '<div class="and-modal-gallery">';
@@ -367,7 +410,7 @@ function andorinha_render_modal_js() {
                         + '</a>';
                 });
                 galHtml += '</div>';
-                galWrap.innerHTML = galHtml;
+                galWrap.innerHTML += galHtml;
             }
 
             // ---- FOOTER ----
@@ -419,16 +462,28 @@ function andorinha_render_modal_js() {
 // 5. RENDERIZAR CARD
 // =============================================
 function andorinha_render_projeto_card( $post_id, $col_class ) {
-    $tipo          = get_post_meta( $post_id, '_andorinha_tipo',          true ) ?: 'projeto';
-    $descricao     = get_post_meta( $post_id, '_andorinha_descricao',     true );
-    $termo         = get_post_meta( $post_id, '_andorinha_termo_fomento', true );
-    $cod_objeto    = get_post_meta( $post_id, '_andorinha_cod_objeto',    true );
-    $cod_programa  = get_post_meta( $post_id, '_andorinha_cod_programa',  true );
-    $nome_programa = get_post_meta( $post_id, '_andorinha_nome_programa', true );
-    $pdf_url       = get_post_meta( $post_id, '_andorinha_projeto_pdf',   true );
+    $tipo          = get_post_meta( $post_id, '_andorinha_tipo',           true ) ?: 'projeto';
+    $descricao     = get_post_meta( $post_id, '_andorinha_descricao',      true );
+    $termo         = get_post_meta( $post_id, '_andorinha_termo_fomento',  true );
+    $cod_objeto    = get_post_meta( $post_id, '_andorinha_cod_objeto',     true );
+    $cod_programa  = get_post_meta( $post_id, '_andorinha_cod_programa',   true );
+    $nome_programa = get_post_meta( $post_id, '_andorinha_nome_programa',  true );
+    $pdf_url       = get_post_meta( $post_id, '_andorinha_projeto_pdf',    true );
     $galeria_ids   = get_post_meta( $post_id, '_andorinha_projeto_galeria', true );
+    $video_url_raw = get_post_meta( $post_id, '_andorinha_video_url',      true );
+    $video_arquivo = get_post_meta( $post_id, '_andorinha_video_arquivo',  true );
     $img_card      = andorinha_get_projeto_image( $post_id, 'medium_large' );
     $img_modal     = andorinha_get_projeto_image( $post_id, 'large' );
+
+    // Resolver embed de vídeo: arquivo tem prioridade sobre URL
+    $video_embed  = '';
+    $video_is_file = false;
+    if ( ! empty( $video_arquivo ) ) {
+        $video_embed   = $video_arquivo;
+        $video_is_file = true;
+    } elseif ( ! empty( $video_url_raw ) ) {
+        $video_embed = andorinha_get_video_embed( $video_url_raw );
+    }
 
     $tipo_label = $tipo === 'evento' ? 'Evento' : 'Projeto';
     $tipo_icon  = $tipo === 'evento' ? 'fa-solid fa-calendar-days' : 'fa-solid fa-diagram-project';
@@ -462,6 +517,8 @@ function andorinha_render_projeto_card( $post_id, $col_class ) {
         'nome_programa' => $nome_programa,
         'pdf'           => $pdf_url,
         'gallery'       => $gallery_data,
+        'video'         => $video_embed,
+        'video_is_file' => $video_is_file,
     );
 
     $resumo_fields = array();
