@@ -118,10 +118,10 @@ function andorinha_render_tipo_metabox( $post ) {
     <style>
         .andorinha-meta-box { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
         .andorinha-tipo-selector { display: flex; gap: 12px; margin-bottom: 24px; }
-        .andorinha-tipo-btn { flex: 1; padding: 14px; border: 2px solid #ddd; border-radius: 8px; background: #f9f9f9; cursor: pointer; text-align: center; font-size: 15px; font-weight: 600; transition: all 0.2s; }
-        .andorinha-tipo-btn:hover { border-color: #0073aa; background: #f0f7ff; }
+        .andorinha-tipo-btn { flex: 1; padding: 14px 10px; border: 2px solid #ddd; border-radius: 8px; background: #f9f9f9; cursor: pointer; text-align: center; font-size: 14px; font-weight: 600; transition: all 0.2s; color: #555; }
+        .andorinha-tipo-btn:hover { border-color: #0073aa; background: #f0f7ff; color: #0073aa; }
         .andorinha-tipo-btn.active { border-color: #0073aa; background: #e8f4fb; color: #0073aa; }
-        .andorinha-tipo-btn span { display: block; font-size: 28px; margin-bottom: 4px; }
+        .andorinha-tipo-btn i { display: block; font-size: 26px; margin-bottom: 6px; }
         .andorinha-field { margin-bottom: 18px; }
         .andorinha-field label { display: block; font-weight: 600; margin-bottom: 6px; color: #333; font-size: 13px; }
         .andorinha-field label em { font-weight: 400; color: #888; margin-left: 4px; }
@@ -140,11 +140,11 @@ function andorinha_render_tipo_metabox( $post ) {
 
         <!-- Seletor de Tipo -->
         <div class="andorinha-tipo-selector">
-            <div class="andorinha-tipo-btn <?php echo $tipo === 'projeto' ? 'active' : ''; ?>" data-tipo="projeto">
-                <span>📋</span> Projeto
+        <div class="andorinha-tipo-btn <?php echo $tipo === 'projeto' ? 'active' : ''; ?>" data-tipo="projeto">
+                <i class="fa-solid fa-diagram-project"></i> Projeto
             </div>
             <div class="andorinha-tipo-btn <?php echo $tipo === 'evento' ? 'active' : ''; ?>" data-tipo="evento">
-                <span>🎯</span> Evento
+                <i class="fa-solid fa-calendar-days"></i> Evento
             </div>
         </div>
 
@@ -372,6 +372,14 @@ add_action( 'save_post_projetos', 'andorinha_save_projeto_meta' );
 function andorinha_admin_projetos_scripts( $hook ) {
     global $post;
     if ( ( $hook === 'post-new.php' || $hook === 'post.php' ) && isset( $post->post_type ) && $post->post_type === 'projetos' ) {
+        // Font Awesome no admin (para ícones do formulário)
+        wp_enqueue_style(
+            'font-awesome-6-admin',
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css',
+            array(),
+            '6.5.2'
+        );
+
         wp_enqueue_media();
         wp_enqueue_script(
             'andorinha-admin-projetos',
@@ -383,3 +391,4 @@ function andorinha_admin_projetos_scripts( $hook ) {
     }
 }
 add_action( 'admin_enqueue_scripts', 'andorinha_admin_projetos_scripts' );
+
