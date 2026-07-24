@@ -583,7 +583,7 @@ function andorinha_render_modal_js() {
     })();
     </script>
     <?php
-
+}
 
 
 
