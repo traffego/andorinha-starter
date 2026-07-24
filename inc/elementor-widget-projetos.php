@@ -150,7 +150,6 @@ function andorinha_projetos_widget_css() {
     /* Blur via pseudo-element para NÃO criar stacking context no overlay */
     .and-modal-overlay::before {
         content:''; position:fixed; inset:0; z-index:-1;
-        backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px);
         pointer-events:none;
     }
     .and-modal-overlay.and-open { display:flex; }
@@ -160,12 +159,12 @@ function andorinha_projetos_widget_css() {
         width:100%; max-width:820px; max-height:90vh;
         overflow:hidden; display:flex; flex-direction:column;
         box-shadow:0 40px 100px rgba(0,0,0,.45);
-        animation:andModalIn .35s cubic-bezier(.22,.68,0,1.2) both;
+        animation:andModalIn .35s cubic-bezier(.22,.68,0,1.2) forwards;
         position:relative; font-family:'Epilogue',sans-serif;
     }
     @keyframes andModalIn {
         from { opacity:0; transform:scale(.88) translateY(30px); }
-        to   { opacity:1; transform:scale(1)  translateY(0); }
+        to   { opacity:1; transform:none; }
     }
     .and-modal-close {
         position:absolute; top:16px; right:18px; z-index:10;
