@@ -190,10 +190,6 @@ require_once get_template_directory() . '/inc/elementor-widget-projetos.php';
    POPULAR PROJETOS INICIAIS (EXECUTA 1X)
    ============================================= */
 function andorinha_popular_projetos_iniciais() {
-    if ( get_transient( 'andorinha_projetos_populados_v1' ) ) {
-        return;
-    }
-
     $nome_programa = 'Desenvolvimento de Atividades e Apoio a Programas, Eventos e Projetos de Esporte Amador, Educacao, Lazer e Inclusao Social - SNEAELIS (Emenda de Comissão - RP8 - Termo de Fomento)';
 
     $projetos = array(
@@ -232,6 +228,39 @@ function andorinha_popular_projetos_iniciais() {
     );
 
     foreach ( $projetos as $p ) {
+        // Buscar todos os posts com esse título no CPT projetos
+        $existentes = get_posts( array(
+            'post_type'      => 'projetos',
+            'post_status'    => array( 'publish', 'draft', 'trash' ),
+            'title'          => $p['title'],
+            'posts_per_page' => -1,
+            'orderby'        => 'ID',
+            'order'          => 'ASC',
+            'fields'         => 'ids',
+        ) );
+
+        // Remover duplicados — manter apenas o primeiro (menor ID)
+        if ( count( $existentes ) > 1 ) {
+            $keep = array_shift( $existentes ); // menor ID fica
+            foreach ( $existentes as $dup_id ) {
+                wp_delete_post( $dup_id, true ); // force delete
+            }
+            // Garantir meta no post mantido
+            update_post_meta( $keep, '_andorinha_tipo',           $p['tipo'] );
+            update_post_meta( $keep, '_andorinha_termo_fomento',  $p['termo'] );
+            update_post_meta( $keep, '_andorinha_cod_objeto',     $p['objeto'] );
+            update_post_meta( $keep, '_andorinha_cod_programa',   $p['cod_prog'] );
+            update_post_meta( $keep, '_andorinha_nome_programa',  $p['nome_prog'] );
+            wp_update_post( array( 'ID' => $keep, 'post_status' => 'publish' ) );
+            continue;
+        }
+
+        // Já existe exatamente 1 — não fazer nada
+        if ( count( $existentes ) === 1 ) {
+            continue;
+        }
+
+        // Não existe — criar
         $post_id = wp_insert_post( array(
             'post_title'  => $p['title'],
             'post_status' => 'publish',
@@ -246,8 +275,7 @@ function andorinha_popular_projetos_iniciais() {
             update_post_meta( $post_id, '_andorinha_nome_programa',  $p['nome_prog'] );
         }
     }
-
-    set_transient( 'andorinha_projetos_populados_v1', true, YEAR_IN_SECONDS );
 }
 add_action( 'admin_init', 'andorinha_popular_projetos_iniciais' );
+
 
