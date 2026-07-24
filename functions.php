@@ -186,3 +186,68 @@ require_once get_template_directory() . '/inc/cpt-projetos.php';
 require_once get_template_directory() . '/inc/elementor-widget-projetos.php';
 
 
+/* =============================================
+   POPULAR PROJETOS INICIAIS (EXECUTA 1X)
+   ============================================= */
+function andorinha_popular_projetos_iniciais() {
+    if ( get_transient( 'andorinha_projetos_populados_v1' ) ) {
+        return;
+    }
+
+    $nome_programa = 'Desenvolvimento de Atividades e Apoio a Programas, Eventos e Projetos de Esporte Amador, Educacao, Lazer e Inclusao Social - SNEAELIS (Emenda de Comissão - RP8 - Termo de Fomento)';
+
+    $projetos = array(
+        array(
+            'title'    => 'Corrida Atleta para Sempre em Gravatá/PE',
+            'tipo'     => 'evento',
+            'termo'    => '980043',
+            'objeto'   => 'Corrida Atleta para Sempre em Gravatá no Estado de Pernambuco',
+            'cod_prog' => '5100020250028',
+            'nome_prog'=> $nome_programa,
+        ),
+        array(
+            'title'    => 'Corrida Atleta para Sempre em Ipojuca/PE',
+            'tipo'     => 'evento',
+            'termo'    => '979793',
+            'objeto'   => 'Corrida Atleta para Sempre em Ipojuca no Estado de Pernambuco',
+            'cod_prog' => '5100020250028',
+            'nome_prog'=> $nome_programa,
+        ),
+        array(
+            'title'    => 'Corrida Atleta Para Sempre em Jaboatão dos Guararapes/PE',
+            'tipo'     => 'evento',
+            'termo'    => '979754',
+            'objeto'   => 'Corrida Atleta Para Sempre em Jaboatão dos Guararapes/PE',
+            'cod_prog' => '5100020250028',
+            'nome_prog'=> $nome_programa,
+        ),
+        array(
+            'title'    => 'Corrida Atleta para Sempre em Olinda/PE',
+            'tipo'     => 'evento',
+            'termo'    => '979769',
+            'objeto'   => 'Corrida Atleta para Sempre em Olinda, no Estado de Pernambuco',
+            'cod_prog' => '',
+            'nome_prog'=> $nome_programa,
+        ),
+    );
+
+    foreach ( $projetos as $p ) {
+        $post_id = wp_insert_post( array(
+            'post_title'  => $p['title'],
+            'post_status' => 'publish',
+            'post_type'   => 'projetos',
+        ) );
+
+        if ( $post_id && ! is_wp_error( $post_id ) ) {
+            update_post_meta( $post_id, '_andorinha_tipo',           $p['tipo'] );
+            update_post_meta( $post_id, '_andorinha_termo_fomento',  $p['termo'] );
+            update_post_meta( $post_id, '_andorinha_cod_objeto',     $p['objeto'] );
+            update_post_meta( $post_id, '_andorinha_cod_programa',   $p['cod_prog'] );
+            update_post_meta( $post_id, '_andorinha_nome_programa',  $p['nome_prog'] );
+        }
+    }
+
+    set_transient( 'andorinha_projetos_populados_v1', true, YEAR_IN_SECONDS );
+}
+add_action( 'admin_init', 'andorinha_popular_projetos_iniciais' );
+
