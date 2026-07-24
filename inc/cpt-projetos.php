@@ -148,84 +148,18 @@ add_action( 'save_post_projetos', 'andorinha_save_projeto_meta' );
 function andorinha_admin_projetos_scripts( $hook ) {
     global $post;
     if ( ( $hook === 'post-new.php' || $hook === 'post.php' ) && isset( $post->post_type ) && $post->post_type === 'projetos' ) {
+        // Carrega o media uploader nativo do WordPress
         wp_enqueue_media();
-        ?>
-        <script>
-        jQuery(document).ready(function($){
-            // Upload PDF
-            var pdfFrame;
-            $('#andorinha_upload_pdf_btn').on('click', function(e){
-                e.preventDefault();
-                if (pdfFrame) { pdfFrame.open(); return; }
-                pdfFrame = wp.media({
-                    title: 'Selecionar PDF do Projeto',
-                    button: { text: 'Usar este PDF' },
-                    library: { type: 'application/pdf' },
-                    multiple: false
-                });
-                pdfFrame.on('select', function(){
-                    var attachment = pdfFrame.state().get('selection').first().toJSON();
-                    $('#andorinha_projeto_pdf').val(attachment.url);
-                    $('#andorinha_pdf_preview').html('<a href="'+attachment.url+'" target="_blank">📄 '+attachment.filename+'</a>');
-                    $('#andorinha_remove_pdf_btn').show();
-                });
-                pdfFrame.open();
-            });
 
-            $('#andorinha_remove_pdf_btn').on('click', function(e){
-                e.preventDefault();
-                $('#andorinha_projeto_pdf').val('');
-                $('#andorinha_pdf_preview').empty();
-                $(this).hide();
-            });
-
-            // Upload Galeria
-            var galeriaFrame;
-            $('#andorinha_upload_galeria_btn').on('click', function(e){
-                e.preventDefault();
-                if (galeriaFrame) { galeriaFrame.open(); return; }
-                galeriaFrame = wp.media({
-                    title: 'Selecionar Fotos do Projeto',
-                    button: { text: 'Adicionar à Galeria' },
-                    library: { type: 'image' },
-                    multiple: true
-                });
-                galeriaFrame.on('select', function(){
-                    var selection = galeriaFrame.state().get('selection');
-                    var currentIds = $('#andorinha_projeto_galeria').val() ? $('#andorinha_projeto_galeria').val().split(',') : [];
-                    
-                    selection.each(function(attachment){
-                        attachment = attachment.toJSON();
-                        if (currentIds.indexOf(attachment.id.toString()) === -1) {
-                            currentIds.push(attachment.id);
-                            var thumb = attachment.sizes && attachment.sizes.thumbnail ? attachment.sizes.thumbnail.url : attachment.url;
-                            $('#andorinha_galeria_container').append(
-                                '<div class="andorinha-galeria-item" data-id="'+attachment.id+'">'+
-                                '<img src="'+thumb+'" />'+
-                                '<button type="button" class="remove-img">&times;</button>'+
-                                '</div>'
-                            );
-                        }
-                    });
-                    $('#andorinha_projeto_galeria').val(currentIds.join(','));
-                });
-                galeriaFrame.open();
-            });
-
-            // Remover Foto da Galeria
-            $('#andorinha_galeria_container').on('click', '.remove-img', function(e){
-                e.preventDefault();
-                var item = $(this).closest('.andorinha-galeria-item');
-                var idToRemove = item.data('id').toString();
-                item.remove();
-
-                var currentIds = $('#andorinha_projeto_galeria').val().split(',');
-                var newIds = currentIds.filter(function(id){ return id !== idToRemove && id !== ''; });
-                $('#andorinha_projeto_galeria').val(newIds.join(','));
-            });
-        });
-        </script>
-        <?php
+        // Enfileira o JS externo com dependência explícita de jQuery e wp-media
+        wp_enqueue_script(
+            'andorinha-admin-projetos',
+            get_template_directory_uri() . '/assets/js/admin-projetos.js',
+            array( 'jquery', 'wp-mediaelement' ),
+            wp_get_theme()->get( 'Version' ),
+            true // carregar no footer, após tudo estar pronto
+        );
     }
 }
 add_action( 'admin_enqueue_scripts', 'andorinha_admin_projetos_scripts' );
+
