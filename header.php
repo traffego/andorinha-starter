@@ -17,6 +17,21 @@
         </script>
         
         <?php wp_head(); ?>
+        <style>
+            /* ---- Menu: ajuste de tamanho e espaçamento ---- */
+            .navbar .nav-link,
+            .navbar .nav-link.link,
+            .navbar .nav-link.display-4 {
+                font-size: 0.82rem !important;
+                padding: 6px 12px !important;
+                letter-spacing: 0.5px;
+            }
+            .navbar .navbar-buttons .btn {
+                font-size: 0.8rem !important;
+                padding: 7px 16px !important;
+            }
+            .navbar .navbar-nav { gap: 0; }
+        </style>
     </head>
     <body <?php body_class(); ?>>
         <?php wp_body_open(); ?>
@@ -71,6 +86,9 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link link text-black display-4" href="<?php echo esc_url( home_url( '/' ) ); ?>#content4-d">Soluções</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link link text-black display-4" href="<?php echo esc_url( home_url( '/' ) ); ?>#projetos">Projetos</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link link text-black display-4" href="<?php echo esc_url( home_url( '/' ) ); ?>#form3-g">Localização</a>
